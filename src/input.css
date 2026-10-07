@@ -9,9 +9,9 @@
    світла — усе PASS (CVD 7.2 → легенда й підписи обов'язкові, вони є);
    темна — ΔE 24.1 / CVD 14.4 / контраст ≥ 3:1, але смуга світлоти й chroma поза нормою: така сама брендова палітра. */
 :root {
-  --series-1: var(--color-teal-700);
-  --series-2: var(--color-sand-500);
-  --series-3: var(--color-forest-500);
+  --series-1: var(--color-sand-500);
+  --series-2: var(--color-forest-500);
+  --series-3: var(--color-teal-700);
   --series-other: var(--color-gray-400);
   --viz-bar: var(--color-forest-200);     /* місяць у нормі */
   --viz-bar-over: var(--color-teal-700);  /* понад норму */
@@ -20,9 +20,9 @@
   --accent-ink: #ffffff;
 }
 .dark { /* темна тема: клас на <html> (перемикач у шапці; без вибору — як у системі) */
-  --series-1: var(--color-teal-500);
-  --series-2: var(--color-sand-400);
-  --series-3: var(--color-forest-700);
+  --series-1: var(--color-sand-400);
+  --series-2: var(--color-forest-700);
+  --series-3: var(--color-teal-500);
   --series-other: var(--color-gray-500);
   --viz-bar: var(--color-forest-800);
   --viz-bar-over: var(--color-teal-500);
