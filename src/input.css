@@ -55,8 +55,10 @@ html.has-sf select { /* SF Symbol chevron.down, коли SF Pro Rounded вста
 
 /* Чіп проєкту: тон кольору проєкту зі статистики (--c задається в розмітці). */
 .chip { background: color-mix(in srgb, var(--c) 32%, transparent); }
+.chip-strong { background: color-mix(in srgb, var(--c) 55%, transparent); } /* дизайнер — насиченіше за проєкт */
 @media (prefers-color-scheme: dark) {
   .chip { background: color-mix(in srgb, var(--c) 45%, transparent); }
+  .chip-strong { background: color-mix(in srgb, var(--c) 75%, transparent); }
 }
 
 /* Перетягування карток (SortableJS). Без @layer, щоб перекрити утиліти картки. */

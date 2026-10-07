@@ -158,7 +158,7 @@ function logout(msg) {
   store.set('kanbanBoot', null);
   store.set('kanbanStats', null);
   Object.assign(state, { data: null, lists: {}, stats: null });
-  projectColors = null;
+  projectColors = designerColors = null;
   $('#app').hidden = true;
   $('#keyScreen').hidden = false;
   $('#keyError').textContent = msg || '';
@@ -391,6 +391,27 @@ function projectColor(name) {
   return projectColors.get(norm(name));
 }
 
+// Колір дизайнера — за першою появою в таблиці (від найстарішої вкладки), тож у кожного він сталий.
+// Палітра з кінця, щоб перший дизайнер не збігався кольором з найбільшим проєктом.
+// ponytail: після 7 дизайнерів кольори повторюються по колу; більше людей — тоді думати про іншу схему.
+let designerColors = null;
+function designerColor(name) {
+  if (!designerColors) {
+    const stats = state.stats || cacheGet('kanbanStats');
+    if (!stats) return null;
+    const names = [...new Set(stats.slice().reverse().flatMap((t) => t.items.map((i) => norm(i.assignee)).filter(Boolean)))];
+    designerColors = new Map(names.map((n, k) => [n, `var(--series-${SERIES - (k % SERIES)})`]));
+  }
+  return designerColors.get(norm(name));
+}
+
+function designerChipHtml(name) {
+  const color = designerColor(name);
+  return color
+    ? `<span title="Designer" class="chip-strong rounded-full px-2 py-0.5 font-medium text-neutral-950 dark:text-white" style="--c:${color}">${esc(name)}</span>`
+    : `<span title="Designer" class="rounded-full bg-neutral-200 px-2 py-0.5 font-medium text-neutral-800 dark:bg-white/15 dark:text-neutral-100">${esc(name)}</span>`;
+}
+
 function chipHtml(name) {
   const color = projectColor(name);
   return color
@@ -402,7 +423,7 @@ function cardHtml(i, cols) {
   const meta = [
     i.project && chipHtml(i.project),
     i.hours != null && `<span class="tabular-nums">${fmtHours(i.hours)} h</span>`,
-    i.assignee && `<span title="Designer" class="rounded bg-accent px-1.5 py-0.5 font-medium text-accent-ink">${esc(i.assignee)}</span>`, // суцільний бренд-колір, щоб не сплутати з напівпрозорим чіпом проєкту
+    i.assignee && designerChipHtml(i.assignee),
     i.doneDate && norm(i.status) === 'done' ? `<span title="Done" class="inline-flex items-center gap-0.5">${ICON_CHECK}${esc(i.doneDate)}</span>`
       : i.deadline ? `<span title="Deadline">due ${esc(i.deadline)}</span>`
       : i.doneDate && `<span title="Date">${esc(i.doneDate)}</span>`,
@@ -618,7 +639,7 @@ async function loadStats({ fresh = false, background = false } = {}) {
     state.stats = (await api({ action: 'all', ...(fresh && { fresh: 1 }) })).tabs;
     state.statsStale = false;
     cacheSet('kanbanStats', state.stats);
-    projectColors = null;
+    projectColors = designerColors = null;
     if (visible()) renderStats();
     else if (state.data && !state.dragging && !state.pending && !document.querySelector('[data-add-form]')) render(); // кольори чіпів
   } catch (e) {
