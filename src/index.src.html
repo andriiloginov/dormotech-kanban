@@ -392,7 +392,7 @@ function columnHtml(status, cols, items) {
   const hours = items.reduce((s, i) => s + (i.hours || 0), 0);
   return `<section class="flex min-w-0 flex-col rounded-lg bg-gray-50 lg:flex-1 dark:bg-white/5">
     <div class="flex items-center gap-2 px-3 pt-3 pb-2">
-      <h2 class="truncate rounded px-1.5 py-0.5 text-sm ${STATUS_TAG[norm(status)] || TAG.gray}">${esc(status || 'No status')}</h2>
+      <h2 class="truncate rounded px-1.5 py-0.5 text-sm font-semibold ${STATUS_TAG[norm(status)] || TAG.gray}">${esc(status || 'No status')}</h2>
       <span class="text-sm tabular-nums text-gray-600 dark:text-gray-400">${items.length}</span>
       <span class="ml-auto text-xs tabular-nums text-gray-600 dark:text-gray-400">${fmtHours(hours)} h</span>
     </div>
@@ -454,7 +454,7 @@ function designerChipHtml(name) {
 }
 
 function chipHtml(name) {
-  return `<span class="rounded px-1.5 py-0.5 ${TAG[projectColor(name) || 'gray']}">${esc(name)}</span>`;
+  return `<span class="rounded px-1.5 py-0.5 font-semibold ${TAG[projectColor(name) || 'gray']}">${esc(name)}</span>`;
 }
 
 function cardHtml(i, cols) {
