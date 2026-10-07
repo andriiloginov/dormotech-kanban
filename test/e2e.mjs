@@ -238,6 +238,23 @@ await test('нова вкладка-місяць зліва відкриваєт
   onEdit();
 });
 
+await test('перемикач теми: темна ↔ світла, вибір пам’ятається, без вибору — системна', async () => {
+  const isDark = (p) => p.evaluate(() => document.documentElement.classList.contains('dark'));
+  const p = await browser.newPage({ colorScheme: 'dark' });
+  await p.goto(`${PAGE}#key=${KEY}`);
+  await p.locator('article').first().waitFor();
+  assert.equal(await isDark(p), true, 'системна темна');
+  await p.click('#themeBtn');
+  assert.equal(await isDark(p), false);
+  assert.equal(await p.evaluate(() => getComputedStyle(document.body).backgroundColor), 'rgb(255, 255, 255)');
+  await p.reload();
+  await p.locator('article').first().waitFor();
+  assert.equal(await isDark(p), false, 'вибір збережено');
+  await p.click('#themeBtn');
+  assert.equal(await isDark(p), true);
+  await p.close();
+});
+
 await test('вихід: ключ і кеш стерто, екран входу', async () => {
   await page.click('#logoutBtn');
   await page.getByText('Enter access key').waitFor();

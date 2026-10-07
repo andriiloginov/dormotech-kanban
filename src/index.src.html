@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <meta name="robots" content="noindex">
+<script>
+// Тема до відмалювання (без спалаху): вибір користувача, інакше — системна.
+(() => {
+  let t = null;
+  try { t = localStorage.getItem('dormotech:theme'); } catch {}
+  const dark = t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.classList.toggle('dark', dark);
+  document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+})();
+</script>
 <title>Dormotech Design</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20239.1%20239.6%22%3E%3Cstyle%3Epath%7Bfill%3A%231e1b19%7D%40media%20%28prefers-color-scheme%3Adark%29%7Bpath%7Bfill%3A%23fff%7D%7D%3C%2Fstyle%3E%3Cpath%20d%3D%22M120.295%2040.7065C77.1585%2040.7065%2042.3018%2075.7124%2042.3018%20118.928C42.3018%20162.143%2077.2267%20197.115%20120.346%20197.149C163.466%20197.132%20198.374%20162.126%20198.374%20118.928C198.374%2075.7295%20163.432%2040.7065%20120.295%2040.7065ZM120.295%20179.211C87.0227%20179.211%2060.1049%20152.244%2060.1049%20118.911C60.1049%2085.5776%2087.0227%2058.6106%20120.295%2058.6106C153.567%2058.6106%20180.485%2085.5605%20180.485%20118.911C180.485%20152.261%20153.499%20179.211%20120.295%20179.211Z%22%2F%3E%3Cpath%20d%3D%22M219.516%2034.2549C219.516%2019.901%20207.846%208.20957%20193.518%208.20957C187.078%208.20957%20181.252%2010.6673%20176.703%2014.5588C159.701%205.29099%20140.279%200%20119.528%200C53.5118%200%200%2053.6097%200%20119.747C0%20185.884%2053.5118%20239.511%20119.528%20239.511C185.545%20239.511%20239.057%20185.902%20239.057%20119.747C239.057%2092.9337%20230.164%2068.2196%20215.325%2048.2675C217.931%2044.2054%20219.499%2039.4093%20219.499%2034.2378M212.241%2034.2549C212.241%2037.5148%20211.321%2040.5529%20209.839%2043.2325C209.294%2044.2054%20208.698%2045.127%20207.999%2045.9804C207.624%2046.4412%20207.284%2046.9191%20206.875%2047.3458C205.801%2048.4382%20204.592%2049.394%20203.263%2050.1791C200.418%2051.9371%20197.096%2053.0123%20193.501%2053.0123C183.194%2053.0123%20174.778%2044.5809%20174.778%2034.2549C174.778%2031.7118%20175.289%2029.3053%20176.209%2027.0865C176.822%2025.6016%20177.674%2024.2532%20178.628%2022.9902C178.935%2022.5806%20179.276%2022.188%20179.616%2021.7955C180.655%2020.6349%20181.797%2019.5596%20183.092%2018.6721C186.073%2016.6581%20189.651%2015.4804%20193.501%2015.4804C203.808%2015.4804%20212.224%2023.9119%20212.224%2034.2378M119.545%20228.127C59.8153%20228.127%2011.3804%20179.604%2011.3804%20119.764C11.3804%2059.9247%2059.8153%2011.4012%20119.545%2011.4012C137.655%2011.4012%20154.76%2015.873%20169.786%2023.7583C168.355%2026.9841%20167.537%2030.5171%20167.537%2034.2549C167.537%2048.6088%20179.207%2060.3002%20193.535%2060.3002C198.544%2060.3002%20203.178%2058.7983%20207.147%2056.3405C220.027%2074.1763%20227.71%2096.0912%20227.71%20119.764C227.71%20179.604%20179.276%20228.127%20119.545%20228.127Z%22%2F%3E%3C%2Fsvg%3E">
 <!-- tailwind -->
@@ -44,6 +54,10 @@
       <span id="total" class="shrink-0 px-1 text-sm tabular-nums text-forest-700 dark:text-forest-300"></span>
       </div>
       <button id="refreshBtn" type="button" class="h-8 rounded-md border border-forest-950/15 px-3 text-sm font-medium hover:bg-forest-50 disabled:opacity-50 dark:border-white/15 dark:hover:bg-white/5" aria-label="Refresh"><span id="refreshIcon" class="flex sm:hidden"></span><span class="max-sm:hidden">Refresh</span></button>
+      <button id="themeBtn" type="button" aria-label="Toggle light or dark theme" title="Theme" class="flex h-8 items-center rounded-md border border-forest-950/15 px-2 text-forest-800 hover:bg-forest-50 dark:border-white/15 dark:text-forest-200 dark:hover:bg-white/5">
+        <svg class="size-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/></svg>
+        <svg class="hidden size-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>
+      </button>
       <button id="logoutBtn" type="button" class="h-8 rounded-md border border-red-600/30 px-3 text-sm font-medium text-red-600 hover:bg-red-50 dark:border-red-400/40 dark:text-red-400 dark:hover:bg-red-400/10">Log out</button>
     </div>
   </header>
@@ -166,6 +180,17 @@ function logout(msg) {
 }
 
 $('#logoutBtn').addEventListener('click', () => logout());
+// Перемикач теми (іконки Heroicons, MIT). Вибір запам'ятовується; поки не вибрано — тема йде за системою.
+function setTheme(dark) {
+  document.documentElement.classList.toggle('dark', dark);
+  document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+}
+$('#themeBtn').addEventListener('click', () => {
+  const dark = !document.documentElement.classList.contains('dark');
+  setTheme(dark);
+  store.set('theme', dark ? 'dark' : 'light');
+});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => { if (!store.get('theme')) setTheme(e.matches); });
 
 $('#keyForm').addEventListener('submit', (e) => {
   e.preventDefault();
@@ -437,15 +462,20 @@ function cardHtml(i, cols) {
   ].filter(Boolean).join('');
   const links = [[i.briefLink, 'Brief', ICON_BRIEF], [i.fileLink, 'File', ICON_FILE]]
     .filter(([u]) => safeUrl(u))
-    .map(([u, label, icon]) => `<a href="${esc(u)}" target="_blank" rel="noopener" title="${label}" aria-label="${label}" class="rounded p-1 text-forest-700 hover:bg-forest-950/5 hover:text-forest-950 dark:text-forest-300 dark:hover:bg-white/10 dark:hover:text-white">${icon}</a>`).join('');
+    .map(([u, label, icon]) => `<a href="${esc(u)}" target="_blank" rel="noopener" title="${label}" aria-label="${label}" class="rounded p-1 text-(--h-800) hover:bg-(--h-950)/5 hover:text-(--h-950) dark:text-(--h-300) dark:hover:bg-white/10 dark:hover:text-white">${icon}</a>`).join('');
   const current = columnFor(cols, i.status);
   const options = cols.map((s) => `<option value="${esc(s)}"${s === current ? ' selected' : ''}>${esc(s || 'No status')}</option>`).join('');
-  return `<article ${i.row ? `data-row="${i.row}" tabindex="0"` : 'data-temp'} class="cursor-pointer rounded-md border border-forest-950/10 bg-white p-3 shadow-xs outline-none hover:border-forest-950/25 focus-visible:border-forest-950 dark:border-white/10 dark:bg-forest-900 dark:hover:border-white/25 dark:focus-visible:border-white">
+  // Картка в кольорі дизайнера (усі відтінки його шкали); без дизайнера — нейтральна біла. Контраст тексту ≥ 6:1.
+  const hue = i.assignee && designerColor(i.assignee);
+  const tone = hue
+    ? 'border-(--h-300) bg-(--h-100) hover:border-(--h-500) dark:border-(--h-800) dark:bg-(--h-950) dark:hover:border-(--h-600)'
+    : 'border-forest-950/10 bg-white hover:border-forest-950/25 dark:border-white/10 dark:bg-forest-900 dark:hover:border-white/25';
+  return `<article data-card ${hue ? `data-hue="${hue}"` : ''} ${i.row ? `data-row="${i.row}" tabindex="0"` : 'data-temp'} class="cursor-pointer rounded-md border p-3 text-(--h-950) shadow-xs outline-none focus-visible:border-(--h-950) dark:text-white dark:focus-visible:border-white ${tone}">
     <p class="text-sm leading-snug font-medium break-words">${esc(i.title)}</p>
-    ${meta ? `<div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-forest-700 dark:text-forest-300">${meta}</div>` : ''}
+    ${meta ? `<div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-(--h-800) dark:text-(--h-300)">${meta}</div>` : ''}
     <div class="mt-2 flex items-center justify-between gap-2">
-      ${i.row ? `<select data-status-select aria-label="Status" class="h-7 min-w-0 rounded border border-transparent bg-transparent px-1 text-xs text-forest-700 hover:border-forest-950/15 dark:text-forest-300 dark:hover:border-white/15">${options}</select>`
-        : '<span class="flex h-7 items-center px-1 text-xs text-forest-600 dark:text-forest-600">Saving…</span>'}
+      ${i.row ? `<select data-status-select aria-label="Status" class="h-7 min-w-0 rounded border border-transparent bg-transparent px-1 text-xs text-(--h-800) hover:border-(--h-950)/15 dark:text-(--h-300) dark:hover:border-white/15">${options}</select>`
+        : '<span class="flex h-7 items-center px-1 text-xs text-(--h-700) dark:text-(--h-400)">Saving…</span>'}
       ${links ? `<span class="flex shrink-0 gap-0.5">${links}</span>` : ''}
     </div>
   </article>`;
