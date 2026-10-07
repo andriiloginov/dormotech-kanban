@@ -261,7 +261,7 @@ await test('скриншоти 1280/390 × світла/темна', async () =>
       const p = await browser.newPage({ viewport: { width: w, height: h }, colorScheme: scheme });
       await p.goto(`${PAGE}#key=${KEY}`);
       await p.locator('article').first().waitFor();
-      await p.locator('.chip-strong').first().waitFor(); // кольори дизайнерів — після фонового завантаження статистики
+      await p.locator('[data-hue]').first().waitFor(); // кольори дизайнерів — після фонового завантаження статистики
       await p.screenshot({ path: `test/screenshots/board-${w}-${scheme}.png` });
       const overflow = await p.evaluate(() => [document.documentElement, document.querySelector('#board')].some((el) => el.scrollWidth > el.clientWidth));
       assert.equal(overflow, false, `горизонтальний скрол на ${w}px`);

@@ -10,7 +10,7 @@
 <!-- tailwind -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.6/Sortable.min.js" integrity="sha512-csIng5zcB+XpulRUa+ev1zKo7zRNGpEaVfNB9On1no9KYTEY/rLGAEEpvgdw6nim1WdTuihZY1eqZ31K7/fZjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<body class="bg-white font-sans text-neutral-950 antialiased dark:bg-neutral-950 dark:text-white">
+<body class="bg-white font-sans text-forest-950 antialiased dark:bg-forest-950 dark:text-white">
 
 <div id="keyScreen" hidden class="grid min-h-dvh place-items-center p-4">
   <form id="keyForm" class="w-full max-w-sm space-y-4">
@@ -19,31 +19,31 @@
     </div>
     <label class="block space-y-1.5">
       <span class="text-sm font-medium">Enter access key</span>
-      <input id="keyInput" type="password" required autocomplete="off" class="block w-full rounded-md border border-neutral-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-neutral-900">
+      <input id="keyInput" type="password" required autocomplete="off" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-900">
     </label>
-    <p id="keyError" class="text-sm text-neutral-600 empty:hidden dark:text-neutral-300"></p>
+    <p id="keyError" class="text-sm text-forest-800 empty:hidden dark:text-forest-200"></p>
     <button class="w-full rounded-md bg-accent px-3 py-2 text-sm font-medium text-accent-ink hover:bg-accent/90">Sign in</button>
   </form>
 </div>
 
 <div id="app" hidden class="flex min-h-dvh flex-col">
-  <header class="sticky top-0 z-10 border-b border-neutral-950/10 bg-white/90 backdrop-blur dark:border-white/10 dark:bg-neutral-950/90">
+  <header class="sticky top-0 z-10 border-b border-forest-950/10 bg-white/90 backdrop-blur dark:border-white/10 dark:bg-forest-950/90">
     <div class="flex flex-wrap items-center gap-2 px-4 py-3">
       <h1 class="flex items-center gap-2.5 text-sm font-semibold">
         <svg class="h-7 w-auto" aria-hidden="true" viewBox="0 0 239.1 239.6" fill="currentColor"><path d="M120.295 40.7065C77.1585 40.7065 42.3018 75.7124 42.3018 118.928C42.3018 162.143 77.2267 197.115 120.346 197.149C163.466 197.132 198.374 162.126 198.374 118.928C198.374 75.7295 163.432 40.7065 120.295 40.7065ZM120.295 179.211C87.0227 179.211 60.1049 152.244 60.1049 118.911C60.1049 85.5776 87.0227 58.6106 120.295 58.6106C153.567 58.6106 180.485 85.5605 180.485 118.911C180.485 152.261 153.499 179.211 120.295 179.211Z"/><path d="M219.516 34.2549C219.516 19.901 207.846 8.20957 193.518 8.20957C187.078 8.20957 181.252 10.6673 176.703 14.5588C159.701 5.29099 140.279 0 119.528 0C53.5118 0 0 53.6097 0 119.747C0 185.884 53.5118 239.511 119.528 239.511C185.545 239.511 239.057 185.902 239.057 119.747C239.057 92.9337 230.164 68.2196 215.325 48.2675C217.931 44.2054 219.499 39.4093 219.499 34.2378M212.241 34.2549C212.241 37.5148 211.321 40.5529 209.839 43.2325C209.294 44.2054 208.698 45.127 207.999 45.9804C207.624 46.4412 207.284 46.9191 206.875 47.3458C205.801 48.4382 204.592 49.394 203.263 50.1791C200.418 51.9371 197.096 53.0123 193.501 53.0123C183.194 53.0123 174.778 44.5809 174.778 34.2549C174.778 31.7118 175.289 29.3053 176.209 27.0865C176.822 25.6016 177.674 24.2532 178.628 22.9902C178.935 22.5806 179.276 22.188 179.616 21.7955C180.655 20.6349 181.797 19.5596 183.092 18.6721C186.073 16.6581 189.651 15.4804 193.501 15.4804C203.808 15.4804 212.224 23.9119 212.224 34.2378M119.545 228.127C59.8153 228.127 11.3804 179.604 11.3804 119.764C11.3804 59.9247 59.8153 11.4012 119.545 11.4012C137.655 11.4012 154.76 15.873 169.786 23.7583C168.355 26.9841 167.537 30.5171 167.537 34.2549C167.537 48.6088 179.207 60.3002 193.535 60.3002C198.544 60.3002 203.178 58.7983 207.147 56.3405C220.027 74.1763 227.71 96.0912 227.71 119.764C227.71 179.604 179.276 228.127 119.545 228.127Z"/></svg>
         <span class="max-sm:sr-only">Dormotech Design</span>
       </h1>
-      <nav class="mr-auto ml-2 flex rounded-md bg-neutral-100 p-0.5 text-sm font-medium dark:bg-white/10" aria-label="View">
-        <button type="button" data-view="board" class="rounded px-2.5 py-1 text-neutral-500 aria-pressed:bg-accent aria-pressed:text-accent-ink aria-pressed:shadow-xs dark:text-neutral-400">Board</button>
-        <button type="button" data-view="stats" class="rounded px-2.5 py-1 text-neutral-500 aria-pressed:bg-accent aria-pressed:text-accent-ink aria-pressed:shadow-xs dark:text-neutral-400">Stats</button>
+      <nav class="mr-auto ml-2 flex rounded-md bg-forest-100 p-0.5 text-sm font-medium dark:bg-white/10" aria-label="View">
+        <button type="button" data-view="board" class="rounded px-2.5 py-1 text-forest-700 aria-pressed:bg-accent aria-pressed:text-accent-ink aria-pressed:shadow-xs dark:text-forest-300">Board</button>
+        <button type="button" data-view="stats" class="rounded px-2.5 py-1 text-forest-700 aria-pressed:bg-accent aria-pressed:text-accent-ink aria-pressed:shadow-xs dark:text-forest-300">Stats</button>
       </nav>
       <div id="boardControls" class="flex items-center gap-2 max-sm:order-last max-sm:basis-full sm:flex-wrap">
-      <select id="tabSelect" aria-label="Month" class="h-8 rounded-md max-sm:min-w-0 max-sm:flex-1 border border-neutral-950/15 bg-white px-2 text-sm dark:border-white/15 dark:bg-neutral-900"></select>
-      <select id="projectFilter" aria-label="Project" class="h-8 max-w-40 rounded-md max-sm:min-w-0 max-sm:flex-1 border border-neutral-950/15 bg-white px-2 text-sm dark:border-white/15 dark:bg-neutral-900"></select>
-      <button id="orderBtn" type="button" class="flex h-8 shrink-0 items-center gap-1.5 rounded-md border border-neutral-950/15 px-2.5 text-sm text-neutral-600 hover:bg-neutral-50 dark:border-white/15 dark:text-neutral-300 dark:hover:bg-white/5"><span id="orderIcon" class="flex"></span><span id="orderLabel" class="max-sm:hidden"></span></button>
-      <span id="total" class="shrink-0 px-1 text-sm tabular-nums text-neutral-500 dark:text-neutral-400"></span>
+      <select id="tabSelect" aria-label="Month" class="h-8 rounded-md max-sm:min-w-0 max-sm:flex-1 border border-forest-950/15 bg-white px-2 text-sm dark:border-white/15 dark:bg-forest-900"></select>
+      <select id="projectFilter" aria-label="Project" class="h-8 max-w-40 rounded-md max-sm:min-w-0 max-sm:flex-1 border border-forest-950/15 bg-white px-2 text-sm dark:border-white/15 dark:bg-forest-900"></select>
+      <button id="orderBtn" type="button" class="flex h-8 shrink-0 items-center gap-1.5 rounded-md border border-forest-950/15 px-2.5 text-sm text-forest-800 hover:bg-forest-50 dark:border-white/15 dark:text-forest-200 dark:hover:bg-white/5"><span id="orderIcon" class="flex"></span><span id="orderLabel" class="max-sm:hidden"></span></button>
+      <span id="total" class="shrink-0 px-1 text-sm tabular-nums text-forest-700 dark:text-forest-300"></span>
       </div>
-      <button id="refreshBtn" type="button" class="h-8 rounded-md border border-neutral-950/15 px-3 text-sm font-medium hover:bg-neutral-50 disabled:opacity-50 dark:border-white/15 dark:hover:bg-white/5" aria-label="Refresh"><span id="refreshIcon" class="flex sm:hidden"></span><span class="max-sm:hidden">Refresh</span></button>
+      <button id="refreshBtn" type="button" class="h-8 rounded-md border border-forest-950/15 px-3 text-sm font-medium hover:bg-forest-50 disabled:opacity-50 dark:border-white/15 dark:hover:bg-white/5" aria-label="Refresh"><span id="refreshIcon" class="flex sm:hidden"></span><span class="max-sm:hidden">Refresh</span></button>
       <button id="logoutBtn" type="button" class="h-8 rounded-md border border-red-600/30 px-3 text-sm font-medium text-red-600 hover:bg-red-50 dark:border-red-400/40 dark:text-red-400 dark:hover:bg-red-400/10">Log out</button>
     </div>
   </header>
@@ -51,33 +51,33 @@
   <main id="board" class="flex flex-1 flex-col gap-3 p-4 lg:flex-row lg:items-start"></main>
 </div>
 
-<dialog id="editDialog" class="m-auto w-[min(32rem,calc(100%-2rem))] rounded-lg border border-neutral-950/10 bg-white p-0 text-neutral-950 shadow-xl backdrop:bg-neutral-950/40 dark:border-white/10 dark:bg-neutral-900 dark:text-white">
+<dialog id="editDialog" class="m-auto w-[min(32rem,calc(100%-2rem))] rounded-lg border border-forest-950/10 bg-white p-0 text-forest-950 shadow-xl backdrop:bg-forest-950/40 dark:border-white/10 dark:bg-forest-900 dark:text-white">
   <form id="editForm" method="dialog" class="space-y-4 p-5">
     <h2 class="text-base font-semibold">Task</h2>
     <label class="block space-y-1.5"><span class="text-sm font-medium">Title</span>
-      <textarea name="title" rows="2" required class="block w-full resize-y rounded-md border border-neutral-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-neutral-950"></textarea></label>
+      <textarea name="title" rows="2" required class="block w-full resize-y rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950"></textarea></label>
     <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
       <label class="block space-y-1.5"><span class="text-sm font-medium">Hours</span>
-        <input name="hours" inputmode="decimal" placeholder="e.g. 4.5" class="block w-full rounded-md border border-neutral-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-neutral-950"></label>
+        <input name="hours" inputmode="decimal" placeholder="e.g. 4.5" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950"></label>
       <label class="block space-y-1.5"><span class="text-sm font-medium">Project</span>
-        <input name="project" list="projectList" class="block w-full rounded-md border border-neutral-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-neutral-950"></label>
+        <input name="project" list="projectList" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950"></label>
       <label class="col-span-2 block space-y-1.5 sm:col-span-1"><span class="text-sm font-medium">Designer</span>
-        <input name="assignee" list="assigneeList" class="block w-full rounded-md border border-neutral-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-neutral-950"></label>
+        <input name="assignee" list="assigneeList" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950"></label>
       <div role="group" aria-labelledby="deadlineLabel" class="col-span-2 space-y-1.5 sm:col-span-3">
         <span id="deadlineLabel" class="block text-sm font-medium">Deadline</span>
         <div class="flex gap-2">
-          <input name="deadline" type="date" aria-label="Deadline date" class="block min-w-0 flex-1 rounded-md border border-neutral-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-neutral-950">
-          <input name="deadlineTime" type="time" aria-label="Deadline time" class="block w-32 rounded-md border border-neutral-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent disabled:opacity-50 dark:border-white/15 dark:bg-neutral-950">
+          <input name="deadline" type="date" aria-label="Deadline date" class="block min-w-0 flex-1 rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950">
+          <input name="deadlineTime" type="time" aria-label="Deadline time" class="block w-32 rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent disabled:opacity-50 dark:border-white/15 dark:bg-forest-950">
         </div>
       </div>
       <label class="col-span-2 block space-y-1.5 sm:col-span-1"><span class="text-sm font-medium">Done date</span>
-        <input name="doneDate" type="date" class="block w-full rounded-md border border-neutral-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-neutral-950"></label>
+        <input name="doneDate" type="date" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950"></label>
     </div>
     <label class="block space-y-1.5"><span class="text-sm font-medium">Comment</span>
-      <textarea name="comment" rows="3" class="block w-full resize-y rounded-md border border-neutral-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-neutral-950"></textarea></label>
-    <p id="editError" class="text-sm text-neutral-600 empty:hidden dark:text-neutral-300"></p>
+      <textarea name="comment" rows="3" class="block w-full resize-y rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950"></textarea></label>
+    <p id="editError" class="text-sm text-forest-800 empty:hidden dark:text-forest-200"></p>
     <div class="flex justify-end gap-2">
-      <button value="cancel" formnovalidate class="rounded-md border border-neutral-950/15 px-3 py-2 text-sm font-medium hover:bg-neutral-50 dark:border-white/15 dark:hover:bg-white/5">Cancel</button>
+      <button value="cancel" formnovalidate class="rounded-md border border-forest-950/15 px-3 py-2 text-sm font-medium hover:bg-forest-50 dark:border-white/15 dark:hover:bg-white/5">Cancel</button>
       <button value="save" class="rounded-md bg-accent px-3 py-2 text-sm font-medium text-accent-ink hover:bg-accent/90">Save</button>
     </div>
   </form>
@@ -85,8 +85,8 @@
 <datalist id="projectList"></datalist>
 <datalist id="assigneeList"></datalist>
 
-<div id="tip" hidden class="pointer-events-none fixed z-30 max-w-64 rounded-md bg-neutral-950 px-2.5 py-1.5 text-xs text-white shadow-lg dark:bg-white dark:text-neutral-950"></div>
-<div id="toast" role="status" aria-live="polite" class="pointer-events-none fixed inset-x-4 bottom-4 z-20 mx-auto max-w-md rounded-md bg-neutral-950 px-4 py-3 text-sm text-white shadow-lg transition-opacity empty:opacity-0 dark:bg-white dark:text-neutral-950"></div>
+<div id="tip" hidden class="pointer-events-none fixed z-30 max-w-64 rounded-md bg-forest-950 px-2.5 py-1.5 text-xs text-white shadow-lg dark:bg-white dark:text-forest-950"></div>
+<div id="toast" role="status" aria-live="polite" class="pointer-events-none fixed inset-x-4 bottom-4 z-20 mx-auto max-w-md rounded-md bg-forest-950 px-4 py-3 text-sm text-white shadow-lg transition-opacity empty:opacity-0 dark:bg-white dark:text-forest-950"></div>
 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbxCWXJuV088YScFiY7BAkahVyzJ_ZN0158yZLtuGbqOSmVcqcN7X4GT7m0YNaUVn0xS/exec";
@@ -176,7 +176,7 @@ $('#keyForm').addEventListener('submit', (e) => {
 
 // ---------- завантаження ----------
 function boardMessage(msg) {
-  $('#board').innerHTML = `<p class="w-full py-16 text-center text-sm text-neutral-500 dark:text-neutral-400">${esc(msg)}</p>`;
+  $('#board').innerHTML = `<p class="w-full py-16 text-center text-sm text-forest-700 dark:text-forest-300">${esc(msg)}</p>`;
 }
 
 // Кеш у браузері: сторінка одразу показує дані з минулого разу, а свіжі підтягує у фоні.
@@ -265,9 +265,9 @@ window.addEventListener('focus', autoRefresh);
 
 // ---------- рендер ----------
 const DOT = {
-  'not started': 'border border-neutral-400 dark:border-neutral-500',
-  'in progress': 'bg-neutral-400 dark:bg-neutral-500',
-  done: 'bg-neutral-950 dark:bg-white',
+  'not started': 'border border-forest-500 dark:border-forest-600',
+  'in progress': 'bg-forest-500 dark:bg-forest-600',
+  done: 'bg-forest-950 dark:bg-white',
 };
 // Іконки: SF Symbols зі шрифту SF Pro Rounded, якщо він встановлений на пристрої (вбудовувати його ліцензія Apple не дозволяє).
 // Інакше — Fluent UI System Icons (Microsoft, MIT).
@@ -363,19 +363,19 @@ function dropTarget(list) {
 
 function columnHtml(status, cols, items) {
   const hours = items.reduce((s, i) => s + (i.hours || 0), 0);
-  const dot = DOT[norm(status)] || 'border border-dashed border-neutral-400 dark:border-neutral-500';
-  return `<section class="flex min-w-0 flex-col rounded-lg bg-neutral-50 lg:flex-1 dark:bg-white/5">
+  const dot = DOT[norm(status)] || 'border border-dashed border-forest-500 dark:border-forest-600';
+  return `<section class="flex min-w-0 flex-col rounded-lg bg-forest-50 lg:flex-1 dark:bg-white/5">
     <div class="flex items-center gap-2 px-3 pt-3 pb-2">
       <span class="size-2 shrink-0 rounded-full ${dot}"></span>
       <h2 class="truncate text-sm font-medium">${esc(status || 'No status')}</h2>
-      <span class="text-sm tabular-nums text-neutral-500 dark:text-neutral-400">${items.length}</span>
-      <span class="ml-auto text-xs tabular-nums text-neutral-500 dark:text-neutral-400">${fmtHours(hours)} h</span>
+      <span class="text-sm tabular-nums text-forest-700 dark:text-forest-300">${items.length}</span>
+      <span class="ml-auto text-xs tabular-nums text-forest-700 dark:text-forest-300">${fmtHours(hours)} h</span>
     </div>
     <div data-list="${esc(status)}" class="flex min-h-20 flex-col gap-2 rounded-lg px-2 pb-2">
-      ${items.map((i) => cardHtml(i, cols)).join('') || '<p data-temp class="py-6 text-center text-xs text-neutral-400 dark:text-neutral-500">Empty</p>'}
+      ${items.map((i) => cardHtml(i, cols)).join('') || '<p data-temp class="py-6 text-center text-xs text-forest-600 dark:text-forest-600">Empty</p>'}
     </div>
     <div class="px-2 pb-2">
-      <button type="button" data-add="${esc(status)}" class="w-full rounded-md px-2 py-1.5 text-left text-sm text-neutral-500 hover:bg-neutral-950/5 hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-white/5 dark:hover:text-white">+ Task</button>
+      <button type="button" data-add="${esc(status)}" class="w-full rounded-md px-2 py-1.5 text-left text-sm text-forest-700 hover:bg-forest-950/5 hover:text-forest-950 dark:text-forest-300 dark:hover:bg-white/5 dark:hover:text-white">+ Task</button>
     </div>
   </section>`;
 }
@@ -386,38 +386,44 @@ function projectColor(name) {
   if (!projectColors) {
     const stats = state.stats || cacheGet('kanbanStats');
     if (!stats) return null;
-    projectColors = new Map(computeStats(stats).projects.filter((p) => !p.other).map((p) => [norm(p.name), p.color]));
+    projectColors = new Map(computeStats(stats).projects.filter((p) => !p.other).map((p) => [norm(p.name), p.hue]));
   }
   return projectColors.get(norm(name));
 }
 
 // Колір дизайнера — за першою появою в таблиці (від найстарішої вкладки), тож у кожного він сталий.
-// Палітра з кінця, щоб перший дизайнер не збігався кольором з найбільшим проєктом; без лайму (series-5) — він лише для акценту.
-// ponytail: після 6 дизайнерів кольори повторюються по колу; більше людей — тоді думати про іншу схему.
-const DESIGNER_SERIES = [7, 6, 4, 3, 2, 1];
+// Відтінки в зворотному порядку, щоб перший дизайнер не збігався з найбільшим проєктом.
+// ponytail: бренд дає 3 розрізнені відтінки, тож з 4-го дизайнера кольори повторюються по колу.
+const DESIGNER_HUES = ['forest', 'sand', 'teal'];
+// Повні рядки класів (Tailwind бачить лише їх). Проєкт — світла заливка + крапка; дизайнер — суцільна. Контраст тексту ≥ 4.5:1.
+const HUE_CLASSES = {
+  teal: { dot: 'bg-teal-700 dark:bg-teal-500', soft: 'bg-teal-100 dark:bg-teal-500/15', solid: 'bg-teal-700 text-teal-950 dark:bg-teal-500' },
+  sand: { dot: 'bg-sand-500 dark:bg-sand-400', soft: 'bg-sand-100 dark:bg-sand-400/15', solid: 'bg-sand-500 text-sand-950 dark:bg-sand-400' },
+  forest: { dot: 'bg-forest-500 dark:bg-forest-700', soft: 'bg-forest-100 dark:bg-forest-700/30', solid: 'bg-forest-500 text-forest-950 dark:bg-forest-700 dark:text-white' },
+};
 let designerColors = null;
 function designerColor(name) {
   if (!designerColors) {
     const stats = state.stats || cacheGet('kanbanStats');
     if (!stats) return null;
     const names = [...new Set(stats.slice().reverse().flatMap((t) => t.items.map((i) => norm(i.assignee)).filter(Boolean)))];
-    designerColors = new Map(names.map((n, k) => [n, `var(--series-${DESIGNER_SERIES[k % DESIGNER_SERIES.length]})`]));
+    designerColors = new Map(names.map((n, k) => [n, DESIGNER_HUES[k % DESIGNER_HUES.length]]));
   }
   return designerColors.get(norm(name));
 }
 
 function designerChipHtml(name) {
-  const color = designerColor(name);
-  return color
-    ? `<span title="Designer" class="chip-strong rounded-full px-2 py-0.5 font-medium text-neutral-950 dark:text-white" style="--c:${color}">${esc(name)}</span>`
-    : `<span title="Designer" class="rounded-full bg-neutral-200 px-2 py-0.5 font-medium text-neutral-800 dark:bg-white/15 dark:text-neutral-100">${esc(name)}</span>`;
+  const hue = designerColor(name);
+  return hue
+    ? `<span title="Designer" data-hue="${hue}" class="rounded-full px-2 py-0.5 font-medium ${HUE_CLASSES[hue].solid}">${esc(name)}</span>`
+    : `<span title="Designer" class="rounded-full bg-forest-200 px-2 py-0.5 font-medium text-forest-900 dark:bg-white/15 dark:text-forest-50">${esc(name)}</span>`;
 }
 
 function chipHtml(name) {
-  const color = projectColor(name);
-  return color
-    ? `<span class="chip inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-medium text-neutral-800 dark:text-neutral-100" style="--c:${color}"><span class="size-1.5 rounded-full" style="background:var(--c)"></span>${esc(name)}</span>`
-    : `<span class="rounded bg-neutral-100 px-1.5 py-0.5 font-medium text-neutral-700 dark:bg-white/10 dark:text-neutral-300">${esc(name)}</span>`;
+  const hue = projectColor(name);
+  return hue
+    ? `<span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-medium text-forest-950 dark:text-forest-50 ${HUE_CLASSES[hue].soft}"><span class="size-1.5 rounded-full ${HUE_CLASSES[hue].dot}"></span>${esc(name)}</span>`
+    : `<span class="rounded bg-forest-100 px-1.5 py-0.5 font-medium text-forest-800 dark:bg-white/10 dark:text-forest-200">${esc(name)}</span>`;
 }
 
 function cardHtml(i, cols) {
@@ -431,15 +437,15 @@ function cardHtml(i, cols) {
   ].filter(Boolean).join('');
   const links = [[i.briefLink, 'Brief', ICON_BRIEF], [i.fileLink, 'File', ICON_FILE]]
     .filter(([u]) => safeUrl(u))
-    .map(([u, label, icon]) => `<a href="${esc(u)}" target="_blank" rel="noopener" title="${label}" aria-label="${label}" class="rounded p-1 text-neutral-500 hover:bg-neutral-950/5 hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-white/10 dark:hover:text-white">${icon}</a>`).join('');
+    .map(([u, label, icon]) => `<a href="${esc(u)}" target="_blank" rel="noopener" title="${label}" aria-label="${label}" class="rounded p-1 text-forest-700 hover:bg-forest-950/5 hover:text-forest-950 dark:text-forest-300 dark:hover:bg-white/10 dark:hover:text-white">${icon}</a>`).join('');
   const current = columnFor(cols, i.status);
   const options = cols.map((s) => `<option value="${esc(s)}"${s === current ? ' selected' : ''}>${esc(s || 'No status')}</option>`).join('');
-  return `<article ${i.row ? `data-row="${i.row}" tabindex="0"` : 'data-temp'} class="cursor-pointer rounded-md border border-neutral-950/10 bg-white p-3 shadow-xs outline-none hover:border-neutral-950/25 focus-visible:border-neutral-950 dark:border-white/10 dark:bg-neutral-900 dark:hover:border-white/25 dark:focus-visible:border-white">
+  return `<article ${i.row ? `data-row="${i.row}" tabindex="0"` : 'data-temp'} class="cursor-pointer rounded-md border border-forest-950/10 bg-white p-3 shadow-xs outline-none hover:border-forest-950/25 focus-visible:border-forest-950 dark:border-white/10 dark:bg-forest-900 dark:hover:border-white/25 dark:focus-visible:border-white">
     <p class="text-sm leading-snug font-medium break-words">${esc(i.title)}</p>
-    ${meta ? `<div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-neutral-500 dark:text-neutral-400">${meta}</div>` : ''}
+    ${meta ? `<div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-forest-700 dark:text-forest-300">${meta}</div>` : ''}
     <div class="mt-2 flex items-center justify-between gap-2">
-      ${i.row ? `<select data-status-select aria-label="Status" class="h-7 min-w-0 rounded border border-transparent bg-transparent px-1 text-xs text-neutral-500 hover:border-neutral-950/15 dark:text-neutral-400 dark:hover:border-white/15">${options}</select>`
-        : '<span class="flex h-7 items-center px-1 text-xs text-neutral-400 dark:text-neutral-500">Saving…</span>'}
+      ${i.row ? `<select data-status-select aria-label="Status" class="h-7 min-w-0 rounded border border-transparent bg-transparent px-1 text-xs text-forest-700 hover:border-forest-950/15 dark:text-forest-300 dark:hover:border-white/15">${options}</select>`
+        : '<span class="flex h-7 items-center px-1 text-xs text-forest-600 dark:text-forest-600">Saving…</span>'}
       ${links ? `<span class="flex shrink-0 gap-0.5">${links}</span>` : ''}
     </div>
   </article>`;
@@ -533,7 +539,7 @@ function openAddForm(btn) {
   const status = btn.dataset.add;
   const form = document.createElement('form');
   form.dataset.addForm = '';
-  form.innerHTML = `<input name="title" required placeholder="Task title" aria-label="New task title" class="block w-full rounded-md border border-neutral-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-neutral-900">`;
+  form.innerHTML = `<input name="title" required placeholder="Task title" aria-label="New task title" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-900">`;
   btn.replaceWith(form);
   const input = form.elements.title;
   input.focus();
@@ -618,7 +624,8 @@ const CATEGORIES = [ // перша збіжна категорія виграє;
   ['Posts and social media', /post|social|banner|stor(y|ies)|carousel|публіка|пост|допис|соцмереж|соціальн|інстаграм|instagram|linkedin|сторіс|карусел|банер|reels/i],
   ['Documents and reports', /document|brochure|certificate|letter|sheet|dashboard|invoice|review|analys|звіт|report|документ|one.?pager|резюме|брошур|бланк|сертифікат|лист|framework|схем|а3|a3|дашборд|органігр|інвойс|каталог|catalog|огляд|аналіз/i],
 ];
-const SERIES = 7; // перші 7 проєктів — власний колір, решта — «Інше»
+const SERIES = 3; // бренд дає 3 розрізнені відтінки (валідатор): перші 3 проєкти — свій колір, решта — «Other»
+const HUES = ['teal', 'sand', 'forest']; // = --series-1..3
 const EN_MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 const sumHours = (items) => items.reduce((s, i) => s + (i.hours || 0), 0);
 const pct = (a, b) => `${b ? Math.round((a / b) * 100) : 0}%`;
@@ -631,7 +638,7 @@ function monthLabel(tab) {
 
 async function loadStats({ fresh = false, background = false } = {}) {
   const box = $('#stats'), btn = $('#refreshBtn');
-  const msg = (text) => { box.innerHTML = `<p class="py-16 text-center text-sm text-neutral-500 dark:text-neutral-400">${esc(text)}</p>`; };
+  const msg = (text) => { box.innerHTML = `<p class="py-16 text-center text-sm text-forest-700 dark:text-forest-300">${esc(text)}</p>`; };
   if (!state.stats) state.stats = cacheGet('kanbanStats');
   const visible = () => state.view === 'stats';
   if (visible()) { if (state.stats) renderStats(); else msg('Loading all months…'); }
@@ -670,7 +677,7 @@ function computeStats(tabs) {
     const rest = projects.slice(SERIES);
     projects = projects.slice(0, SERIES).concat({ name: 'Other', other: true, total: sumHours(rest.map((p) => ({ hours: p.total }))), months: months.map((_, mi) => rest.reduce((s, p) => s + p.months[mi], 0)) });
   }
-  projects.forEach((p, i) => { p.color = p.other ? 'var(--series-other)' : `var(--series-${i + 1})`; });
+  projects.forEach((p, i) => { p.color = p.other ? 'var(--series-other)' : `var(--series-${i + 1})`; p.hue = !p.other && HUES[i]; });
 
   const work = months.flatMap((m) => m.work.map((i) => ({ ...i, month: m.label })));
   const cats = CATEGORIES.map(([name]) => ({ name, total: 0 })).concat({ name: 'Other', total: 0 });
@@ -696,9 +703,9 @@ function computeStats(tabs) {
 
 function renderStats() {
   const s = computeStats(state.stats);
-  if (!s.months.length) return void ($('#stats').innerHTML = '<p class="py-16 text-center text-sm text-neutral-500">No data.</p>');
-  const card = 'rounded-lg border border-neutral-950/10 p-4 dark:border-white/10';
-  const muted = 'text-neutral-500 dark:text-neutral-400';
+  if (!s.months.length) return void ($('#stats').innerHTML = '<p class="py-16 text-center text-sm text-forest-700">No data.</p>');
+  const card = 'rounded-lg border border-forest-950/10 p-4 dark:border-white/10';
+  const muted = 'text-forest-700 dark:text-forest-300';
   const section = (title, sub, body) => `<section><h2 class="text-base font-semibold">${title}</h2>${sub ? `<p class="mt-0.5 text-sm ${muted}">${sub}</p>` : ''}<div class="mt-4">${body}</div></section>`;
   const tile = (label, value, note = '') => `<div class="${card}"><p class="text-xs ${muted}">${label}</p><p class="mt-1 text-2xl font-semibold tabular-nums">${value}</p>${note ? `<p class="mt-0.5 text-xs ${muted}">${note}</p>` : ''}</div>`;
   const h = (n) => `${fmtHours(n)} h`;
@@ -706,14 +713,14 @@ function renderStats() {
   // Години по місяцях: стовпчики + лінії середнього і норми
   const max1 = Math.max(NORM, ...s.months.map((m) => m.hours)) * 1.08;
   const y1 = (v) => `${((v / max1) * 100).toFixed(2)}%`;
-  const refLine = (v, label, style) => `<div class="pointer-events-none absolute inset-x-0 border-t ${style}" style="bottom:${y1(v)}"><span class="absolute right-0 -translate-y-full bg-white/80 px-1 text-[11px] ${muted} dark:bg-neutral-950/80">${label}</span></div>`;
+  const refLine = (v, label, style) => `<div class="pointer-events-none absolute inset-x-0 border-t ${style}" style="bottom:${y1(v)}"><span class="absolute right-0 -translate-y-full bg-white/80 px-1 text-[11px] ${muted} dark:bg-forest-950/80">${label}</span></div>`;
   const labels = `<div class="flex gap-1.5 pt-1.5">${s.months.map((m) => `<span class="flex-1 text-center text-[11px] ${muted}">${esc(m.label)}</span>`).join('')}</div>`;
   const monthsChart = `<div class="overflow-x-auto"><div class="min-w-[36rem]">
-    <div class="relative flex h-56 items-end gap-1.5 border-b border-neutral-950/15 dark:border-white/15">
+    <div class="relative flex h-56 items-end gap-1.5 border-b border-forest-950/15 dark:border-white/15">
       ${s.months.map((m) => `<div class="flex h-full flex-1 items-end" data-tip="${esc(m.label)}: ${h(m.hours)}${m.hours > NORM ? `, ${fmtHours(m.hours - NORM)} over target` : ''}">
         <div class="w-full rounded-t-[4px]" style="height:${y1(m.hours)};background:var(${m.hours > NORM ? '--viz-bar-over' : '--viz-bar'})"></div></div>`).join('')}
-      ${refLine(NORM, `target ${NORM}`, 'border-dotted border-neutral-950/50 dark:border-white/50')}
-      ${refLine(s.avg, `average ${fmtHours(Math.round(s.avg))}`, 'border-dashed border-neutral-950/30 dark:border-white/30')}
+      ${refLine(NORM, `target ${NORM}`, 'border-dotted border-forest-950/50 dark:border-white/50')}
+      ${refLine(s.avg, `average ${fmtHours(Math.round(s.avg))}`, 'border-dashed border-forest-950/30 dark:border-white/30')}
     </div>${labels}</div></div>
     <p class="mt-2 flex items-center gap-2 text-xs ${muted}"><span class="size-2.5 rounded-sm" style="background:var(--viz-bar-over)"></span>months over target</p>`;
 
@@ -721,7 +728,7 @@ function renderStats() {
   const max2 = Math.max(...s.months.map((_, mi) => s.projects.reduce((t, p) => t + p.months[mi], 0)), 1) * 1.05;
   const legend = `<div class="mb-3 flex flex-wrap gap-x-4 gap-y-1 text-xs">${s.projects.map((p) => `<span class="flex items-center gap-1.5"><span class="size-2.5 rounded-sm" style="background:${p.color}"></span>${esc(p.name)}</span>`).join('')}</div>`;
   const stacked = `${legend}<div class="overflow-x-auto"><div class="min-w-[36rem]">
-    <div class="flex h-56 items-end gap-1.5 border-b border-neutral-950/15 dark:border-white/15">
+    <div class="flex h-56 items-end gap-1.5 border-b border-forest-950/15 dark:border-white/15">
       ${s.months.map((m, mi) => {
         const segs = s.projects.filter((p) => p.months[mi] > 0);
         return `<div class="flex h-full flex-1 flex-col-reverse gap-[2px]">${segs.map((p, si) => `<div data-tip="${esc(m.label)}, ${esc(p.name)}: ${h(p.months[mi])}" class="w-full ${si === segs.length - 1 ? 'rounded-t-[4px]' : ''}" style="height:${((p.months[mi] / max2) * 100).toFixed(2)}%;background:${p.color}"></div>`).join('')}</div>`;
@@ -740,11 +747,11 @@ function renderStats() {
   const catSum = sumHours(s.cats.map((c) => ({ hours: c.total })));
 
   const top = `<div class="overflow-x-auto"><table class="w-full text-left text-sm">
-    <thead class="text-xs ${muted}"><tr class="border-b border-neutral-950/10 dark:border-white/10"><th class="py-2 pr-3 font-medium">Month</th><th class="py-2 pr-3 font-medium">Task</th><th class="py-2 pr-3 font-medium">Project</th><th class="py-2 text-right font-medium">Hours</th></tr></thead>
-    <tbody>${s.top.map((i) => `<tr class="border-b border-neutral-950/5 dark:border-white/5"><td class="py-2 pr-3 whitespace-nowrap ${muted}">${esc(i.month)}</td><td class="py-2 pr-3">${esc(i.title)}</td><td class="py-2 pr-3 whitespace-nowrap ${muted}">${esc(i.project)}</td><td class="py-2 text-right tabular-nums">${fmtHours(i.hours)}</td></tr>`).join('')}</tbody></table></div>`;
+    <thead class="text-xs ${muted}"><tr class="border-b border-forest-950/10 dark:border-white/10"><th class="py-2 pr-3 font-medium">Month</th><th class="py-2 pr-3 font-medium">Task</th><th class="py-2 pr-3 font-medium">Project</th><th class="py-2 text-right font-medium">Hours</th></tr></thead>
+    <tbody>${s.top.map((i) => `<tr class="border-b border-forest-950/5 dark:border-white/5"><td class="py-2 pr-3 whitespace-nowrap ${muted}">${esc(i.month)}</td><td class="py-2 pr-3">${esc(i.title)}</td><td class="py-2 pr-3 whitespace-nowrap ${muted}">${esc(i.project)}</td><td class="py-2 text-right tabular-nums">${fmtHours(i.hours)}</td></tr>`).join('')}</tbody></table></div>`;
 
   const monthTable = `<details class="mt-3 text-sm"><summary class="cursor-pointer ${muted}">Monthly table</summary>
-    <table class="mt-2 w-full max-w-xs text-sm"><tbody>${s.months.map((m) => `<tr class="border-b border-neutral-950/5 dark:border-white/5"><td class="py-1 ${muted}">${esc(m.label)}</td><td class="py-1 text-right tabular-nums">${fmtHours(m.hours)}</td></tr>`).join('')}</tbody></table></details>`;
+    <table class="mt-2 w-full max-w-xs text-sm"><tbody>${s.months.map((m) => `<tr class="border-b border-forest-950/5 dark:border-white/5"><td class="py-1 ${muted}">${esc(m.label)}</td><td class="py-1 text-right tabular-nums">${fmtHours(m.hours)}</td></tr>`).join('')}</tbody></table></details>`;
 
   $('#stats').innerHTML = `
     <div><h2 class="text-xl font-semibold">${esc(s.months[0].label)} — ${esc(s.months.at(-1).label)}</h2>
