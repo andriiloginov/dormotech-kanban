@@ -393,15 +393,16 @@ function projectColor(name) {
 }
 
 // Колір дизайнера — за першою появою в таблиці (від найстарішої вкладки), тож у кожного він сталий.
-// Палітра з кінця, щоб перший дизайнер не збігався кольором з найбільшим проєктом.
-// ponytail: після 7 дизайнерів кольори повторюються по колу; більше людей — тоді думати про іншу схему.
+// Палітра з кінця, щоб перший дизайнер не збігався кольором з найбільшим проєктом; без лайму (series-5) — він лише для акценту.
+// ponytail: після 6 дизайнерів кольори повторюються по колу; більше людей — тоді думати про іншу схему.
+const DESIGNER_SERIES = [7, 6, 4, 3, 2, 1];
 let designerColors = null;
 function designerColor(name) {
   if (!designerColors) {
     const stats = state.stats || cacheGet('kanbanStats');
     if (!stats) return null;
     const names = [...new Set(stats.slice().reverse().flatMap((t) => t.items.map((i) => norm(i.assignee)).filter(Boolean)))];
-    designerColors = new Map(names.map((n, k) => [n, `var(--series-${SERIES - (k % SERIES)})`]));
+    designerColors = new Map(names.map((n, k) => [n, `var(--series-${DESIGNER_SERIES[k % DESIGNER_SERIES.length]})`]));
   }
   return designerColors.get(norm(name));
 }
