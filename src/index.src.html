@@ -172,7 +172,7 @@ function logout(msg) {
   store.set('kanbanBoot', null);
   store.set('kanbanStats', null);
   Object.assign(state, { data: null, lists: {}, stats: null });
-  projectColors = designerColors = null;
+  designerColors = null;
   $('#app').hidden = true;
   $('#keyScreen').hidden = false;
   $('#keyError').textContent = msg || '';
@@ -392,7 +392,7 @@ function columnHtml(status, cols, items) {
   const hours = items.reduce((s, i) => s + (i.hours || 0), 0);
   return `<section class="flex min-w-0 flex-col rounded-lg bg-gray-50 lg:flex-1 dark:bg-white/5">
     <div class="flex items-center gap-2 px-3 pt-3 pb-2">
-      <h2 class="truncate rounded px-1.5 py-0.5 text-sm font-semibold ${STATUS_TAG[norm(status)] || TAG.gray}">${esc(status || 'No status')}</h2>
+      <h2 class="truncate rounded px-1.5 py-0.5 text-sm font-semibold ${STATUS_TAG[norm(status)] || TAG_GRAY}">${esc(status || 'No status')}</h2>
       <span class="text-sm tabular-nums text-gray-600 dark:text-gray-400">${items.length}</span>
       <span class="ml-auto text-xs tabular-nums text-gray-600 dark:text-gray-400">${fmtHours(hours)} h</span>
     </div>
@@ -405,31 +405,13 @@ function columnHtml(status, cols, items) {
   </section>`;
 }
 
-// Колір тегу проєкту — за рейтингом годин за весь період (перші 3 — як у графіках). Поки статистики немає — сірий.
-let projectColors = null;
-function projectColor(name) {
-  if (!projectColors) {
-    const stats = state.stats || cacheGet('kanbanStats');
-    if (!stats) return null;
-    projectColors = new Map(computeStats(stats).ranked.map((name, i) => [norm(name), TAG_HUES[i % TAG_HUES.length]]));
-  }
-  return projectColors.get(norm(name));
-}
-
 // Колір дизайнера — за першою появою в таблиці (від найстарішої вкладки), тож у кожного він сталий.
 // Порядок відтінків за першою появою дизайнера (Andrii — mint, Magda — sand, третій — forest); teal — лише Done.
 // ponytail: бренд дає 3 розрізнені відтінки, тож з 4-го дизайнера кольори повторюються по колу.
 const DESIGNER_HUES = ['mint', 'sand', 'forest'];
-// Повні рядки класів (Tailwind бачить лише їх). Як у Notion: тег — пастельна заливка з темним текстом того ж відтінку,
-// у темній темі — приглушена заливка зі світлим текстом. Колір лише підказка — назву видно текстом. Контраст ≥ 6:1.
-const TAG_HUES = ['sand', 'forest', 'gray', 'mint']; // teal зарезервований за Done; перші два = кольорам графіків
-const TAG = {
-  teal: 'bg-teal-100 text-teal-900 dark:bg-teal-800 dark:text-teal-100',
-  sand: 'bg-sand-100 text-sand-900 dark:bg-sand-800 dark:text-sand-100',
-  gray: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100',
-  forest: 'bg-forest-100 text-forest-900 dark:bg-forest-800 dark:text-forest-100',
-  mint: 'bg-mint-100 text-mint-900 dark:bg-mint-800 dark:text-mint-100',
-};
+// Повні рядки класів (Tailwind бачить лише їх). Як у Notion: пастельна заливка з темним текстом того ж відтінку,
+// у темній темі — приглушена заливка зі світлим текстом. Контраст ≥ 6:1. Проєкти — сірі, колір лише в статусах і людях.
+const TAG_GRAY = 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100'; // теги проєктів і другорядних статусів — нейтральні
 const AVATAR = {
   mint: 'bg-mint-200 text-mint-900 dark:bg-mint-800 dark:text-mint-100',
   sand: 'bg-sand-200 text-sand-900 dark:bg-sand-800 dark:text-sand-100',
@@ -454,7 +436,7 @@ function designerChipHtml(name) {
 }
 
 function chipHtml(name) {
-  return `<span class="rounded px-1.5 py-0.5 font-semibold ${TAG[projectColor(name) || 'gray']}">${esc(name)}</span>`;
+  return `<span class="rounded px-1.5 py-0.5 font-semibold ${TAG_GRAY}">${esc(name)}</span>`;
 }
 
 function cardHtml(i, cols) {
@@ -678,7 +660,7 @@ async function loadStats({ fresh = false, background = false } = {}) {
     state.stats = (await api({ action: 'all', ...(fresh && { fresh: 1 }) })).tabs;
     state.statsStale = false;
     cacheSet('kanbanStats', state.stats);
-    projectColors = designerColors = null;
+    designerColors = null;
     if (visible()) renderStats();
     else if (state.data && !state.dragging && !state.pending && !document.querySelector('[data-add-form]')) render(); // кольори чіпів
   } catch (e) {
@@ -704,7 +686,6 @@ function computeStats(tabs) {
     p.months[mi] += i.hours || 0;
   }));
   let projects = [...byProject.values()].filter((p) => p.total > 0).sort((a, b) => b.total - a.total);
-  const ranked = projects.map((p) => p.name); // усі проєкти за годинами — для кольорів тегів
   if (projects.length > SERIES) {
     const rest = projects.slice(SERIES);
     projects = projects.slice(0, SERIES).concat({ name: 'Other', other: true, total: sumHours(rest.map((p) => ({ hours: p.total }))), months: months.map((_, mi) => rest.reduce((s, p) => s + p.months[mi], 0)) });
@@ -720,7 +701,7 @@ function computeStats(tabs) {
 
   const hours = months.map((m) => m.hours), sorted = hours.slice().sort((a, b) => a - b), n = hours.length;
   return {
-    months, projects, ranked, work,
+    months, projects, work,
     cats: cats.filter((c) => c.total > 0).sort((a, b) => (a.name === 'Other') - (b.name === 'Other') || b.total - a.total),
     top: work.slice().sort((a, b) => (b.hours || 0) - (a.hours || 0)).slice(0, 10),
     total: sumHours(months),
