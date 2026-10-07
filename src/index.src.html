@@ -310,6 +310,7 @@ const icon = (cp, svg, cls) => (HAS_SF ? `<span class="sf ${cls}" aria-hidden="t
 const ICON_BRIEF = icon(0x10023f, fluent(20, 'M6.5 10a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zM4 4c0-1.1.9-2 2-2h4.59q.62.01 1.06.44l3.91 3.91c.28.28.44.67.44 1.06V16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V8h-3.5A1.5 1.5 0 0 1 10 6.5V3zm5.5 4h3.3L11 3.2v3.3c0 .28.22.5.5.5', 'size-4'), 'text-[15px]');
 const ICON_FILE = icon(0x100262, fluent(20, 'm4.83 10.48 5.65-5.65a3 3 0 0 1 4.25 4.24L8 15.8a1.5 1.5 0 0 1-2.12-2.12l6-6.01a.5.5 0 1 0-.7-.71l-6 6.01a2.5 2.5 0 0 0 3.53 3.54l6.71-6.72a4 4 0 1 0-5.65-5.66L4.12 9.78a.5.5 0 0 0 .7.7', 'size-4'), 'text-[15px]');
 const ICON_CHECK = icon(0x100185, fluent(12, 'M9.85 3.15c.2.2.2.5 0 .7l-4.5 4.5a.5.5 0 0 1-.7 0l-2-2a.5.5 0 1 1 .7-.7L5 7.29l4.15-4.14c.2-.2.5-.2.7 0', 'size-3.5'), 'text-[11px]');
+const ICON_CHEVRON = icon(0x100188, fluent(12, 'M2.15 4.65c.2-.2.5-.2.7 0L6 7.79l3.15-3.14a.5.5 0 1 1 .7.7l-3.5 3.5a.5.5 0 0 1-.7 0l-3.5-3.5a.5.5 0 0 1 0-.7', 'size-3'), 'text-[10px]');
 const ICON_REFRESH = icon(0x100148, fluent(20, 'M4 10a6 6 0 0 1 10.47-4H12.5a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-1 0v1.6a7 7 0 1 0 1.98 4.36.5.5 0 1 0-1 .08L16 10a6 6 0 0 1-12 0', 'size-4'), 'text-[15px]');
 $('#refreshIcon').innerHTML = ICON_REFRESH;
 $('#orderIcon').innerHTML = icon(0x10012c, fluent(20, 'M2.35 7.35 5 4.71V16.5a.5.5 0 0 0 1 0V4.7l2.65 2.65a.5.5 0 0 0 .7-.7l-3.49-3.5A.5.5 0 0 0 5.5 3a.5.5 0 0 0-.39.18L1.65 6.65a.5.5 0 1 0 .7.7m15.3 5.3L15 15.29V3.5a.5.5 0 0 0-1 0v11.8l-2.65-2.65a.5.5 0 0 0-.7.7l3.49 3.5a.5.5 0 0 0 .36.15.5.5 0 0 0 .39-.18l3.46-3.47a.5.5 0 1 0-.7-.7', 'size-4'), 'text-[14px]');
@@ -474,7 +475,7 @@ function cardHtml(i, cols) {
     <p class="text-sm leading-snug font-medium break-words">${esc(i.title)}</p>
     ${meta ? `<div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-(--h-800) dark:text-(--h-300)">${meta}</div>` : ''}
     <div class="mt-2 flex items-center justify-between gap-2">
-      ${i.row ? `<select data-status-select aria-label="Status" class="h-7 min-w-0 rounded border border-transparent bg-transparent px-1 text-xs text-(--h-800) hover:border-(--h-950)/15 dark:text-(--h-300) dark:hover:border-white/15">${options}</select>`
+      ${i.row ? `<span class="relative flex min-w-0 items-center text-(--h-800) dark:text-(--h-300)"><select data-status-select aria-label="Status" class="h-7 min-w-0 rounded border border-transparent bg-transparent px-1 text-xs hover:border-(--h-950)/15 dark:hover:border-white/15">${options}</select><span class="pointer-events-none absolute right-1.5 flex">${ICON_CHEVRON}</span></span>`
         : '<span class="flex h-7 items-center px-1 text-xs text-(--h-700) dark:text-(--h-400)">Saving…</span>'}
       ${links ? `<span class="flex shrink-0 gap-0.5">${links}</span>` : ''}
     </div>
