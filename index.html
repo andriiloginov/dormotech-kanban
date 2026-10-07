@@ -62,7 +62,7 @@
         <input name="hours" inputmode="decimal" placeholder="e.g. 4.5" class="block w-full rounded-md border border-neutral-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-neutral-950"></label>
       <label class="block space-y-1.5"><span class="text-sm font-medium">Project</span>
         <input name="project" list="projectList" class="block w-full rounded-md border border-neutral-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-neutral-950"></label>
-      <label class="col-span-2 block space-y-1.5 sm:col-span-1"><span class="text-sm font-medium">Assignee</span>
+      <label class="col-span-2 block space-y-1.5 sm:col-span-1"><span class="text-sm font-medium">Designer</span>
         <input name="assignee" list="assigneeList" class="block w-full rounded-md border border-neutral-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-neutral-950"></label>
       <div role="group" aria-labelledby="deadlineLabel" class="col-span-2 space-y-1.5 sm:col-span-3">
         <span id="deadlineLabel" class="block text-sm font-medium">Deadline</span>
@@ -403,7 +403,7 @@ function cardHtml(i, cols) {
   const meta = [
     i.project && chipHtml(i.project),
     i.hours != null && `<span class="tabular-nums">${fmtHours(i.hours)} h</span>`,
-    i.assignee && `<span>${esc(i.assignee)}</span>`,
+    i.assignee && `<span title="Designer" class="rounded bg-accent px-1.5 py-0.5 font-medium text-accent-ink">${esc(i.assignee)}</span>`, // суцільний бренд-колір, щоб не сплутати з напівпрозорим чіпом проєкту
     i.doneDate && norm(i.status) === 'done' ? `<span title="Done" class="inline-flex items-center gap-0.5">${ICON_CHECK}${esc(i.doneDate)}</span>`
       : i.deadline ? `<span title="Deadline">due ${esc(i.deadline)}</span>`
       : i.doneDate && `<span title="Date">${esc(i.doneDate)}</span>`,
