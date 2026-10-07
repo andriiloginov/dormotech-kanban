@@ -421,11 +421,11 @@ function projectColor(name) {
 // Порядок відтінків за першою появою дизайнера (Andrii — teal, Magda — sand, третій — forest).
 // ponytail: бренд дає 3 розрізнені відтінки, тож з 4-го дизайнера кольори повторюються по колу.
 const DESIGNER_HUES = ['teal', 'sand', 'forest'];
-// Повні рядки класів (Tailwind бачить лише їх). Проєкт — світла заливка + крапка; дизайнер — суцільна. Контраст тексту ≥ 4.5:1.
+// Повні рядки класів (Tailwind бачить лише їх). Проєкт — світла заливка; дизайнер — суцільна, округла. Контраст тексту ≥ 4.5:1.
 const HUE_CLASSES = {
-  teal: { dot: 'bg-teal-700 dark:bg-teal-500', soft: 'bg-teal-100 dark:bg-teal-500/15', solid: 'bg-teal-700 text-teal-950 dark:bg-teal-500' },
-  sand: { dot: 'bg-sand-500 dark:bg-sand-400', soft: 'bg-sand-100 dark:bg-sand-400/15', solid: 'bg-sand-500 text-sand-950 dark:bg-sand-400' },
-  forest: { dot: 'bg-forest-500 dark:bg-forest-700', soft: 'bg-forest-100 dark:bg-forest-700/30', solid: 'bg-forest-500 text-forest-950 dark:bg-forest-700 dark:text-white' },
+  teal: { soft: 'bg-teal-100 dark:bg-teal-500/15', solid: 'bg-teal-700 text-teal-950 dark:bg-teal-500' },
+  sand: { soft: 'bg-sand-100 dark:bg-sand-400/15', solid: 'bg-sand-500 text-sand-950 dark:bg-sand-400' },
+  forest: { soft: 'bg-forest-100 dark:bg-forest-700/30', solid: 'bg-forest-500 text-forest-950 dark:bg-forest-700 dark:text-white' },
 };
 let designerColors = null;
 function designerColor(name) {
@@ -448,7 +448,7 @@ function designerChipHtml(name) {
 function chipHtml(name) {
   const hue = projectColor(name);
   return hue
-    ? `<span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-medium text-forest-950 dark:text-gray-100 ${HUE_CLASSES[hue].soft}"><span class="size-1.5 rounded-full ${HUE_CLASSES[hue].dot}"></span>${esc(name)}</span>`
+    ? `<span class="rounded px-1.5 py-0.5 font-medium text-forest-950 dark:text-gray-100 ${HUE_CLASSES[hue].soft}">${esc(name)}</span>`
     : `<span class="rounded bg-forest-100 px-1.5 py-0.5 font-medium text-forest-800 dark:bg-white/10 dark:text-gray-300">${esc(name)}</span>`;
 }
 
