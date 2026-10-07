@@ -20,7 +20,7 @@
 <!-- tailwind -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.6/Sortable.min.js" integrity="sha512-csIng5zcB+XpulRUa+ev1zKo7zRNGpEaVfNB9On1no9KYTEY/rLGAEEpvgdw6nim1WdTuihZY1eqZ31K7/fZjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<body class="bg-white font-sans text-forest-950 antialiased dark:bg-forest-950 dark:text-white">
+<body class="bg-white font-sans text-forest-950 antialiased dark:bg-gray-950 dark:text-white">
 
 <div id="keyScreen" hidden class="grid min-h-dvh place-items-center p-4">
   <form id="keyForm" class="w-full max-w-sm space-y-4">
@@ -29,32 +29,32 @@
     </div>
     <label class="block space-y-1.5">
       <span class="text-sm font-medium">Enter access key</span>
-      <input id="keyInput" type="password" required autocomplete="off" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-900">
+      <input id="keyInput" type="password" required autocomplete="off" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-gray-900">
     </label>
-    <p id="keyError" class="text-sm text-forest-800 empty:hidden dark:text-forest-200"></p>
+    <p id="keyError" class="text-sm text-forest-800 empty:hidden dark:text-gray-300"></p>
     <button class="w-full rounded-md bg-accent px-3 py-2 text-sm font-medium text-accent-ink hover:bg-accent/90">Sign in</button>
   </form>
 </div>
 
 <div id="app" hidden class="flex min-h-dvh flex-col">
-  <header class="sticky top-0 z-10 border-b border-forest-950/10 bg-white/90 backdrop-blur dark:border-white/10 dark:bg-forest-950/90">
+  <header class="sticky top-0 z-10 border-b border-forest-950/10 bg-white/90 backdrop-blur dark:border-white/10 dark:bg-gray-950/90">
     <div class="flex flex-wrap items-center gap-2 px-4 py-3">
       <h1 class="flex items-center gap-2.5 text-sm font-semibold">
         <svg class="h-7 w-auto" aria-hidden="true" viewBox="0 0 239.1 239.6" fill="currentColor"><path d="M120.295 40.7065C77.1585 40.7065 42.3018 75.7124 42.3018 118.928C42.3018 162.143 77.2267 197.115 120.346 197.149C163.466 197.132 198.374 162.126 198.374 118.928C198.374 75.7295 163.432 40.7065 120.295 40.7065ZM120.295 179.211C87.0227 179.211 60.1049 152.244 60.1049 118.911C60.1049 85.5776 87.0227 58.6106 120.295 58.6106C153.567 58.6106 180.485 85.5605 180.485 118.911C180.485 152.261 153.499 179.211 120.295 179.211Z"/><path d="M219.516 34.2549C219.516 19.901 207.846 8.20957 193.518 8.20957C187.078 8.20957 181.252 10.6673 176.703 14.5588C159.701 5.29099 140.279 0 119.528 0C53.5118 0 0 53.6097 0 119.747C0 185.884 53.5118 239.511 119.528 239.511C185.545 239.511 239.057 185.902 239.057 119.747C239.057 92.9337 230.164 68.2196 215.325 48.2675C217.931 44.2054 219.499 39.4093 219.499 34.2378M212.241 34.2549C212.241 37.5148 211.321 40.5529 209.839 43.2325C209.294 44.2054 208.698 45.127 207.999 45.9804C207.624 46.4412 207.284 46.9191 206.875 47.3458C205.801 48.4382 204.592 49.394 203.263 50.1791C200.418 51.9371 197.096 53.0123 193.501 53.0123C183.194 53.0123 174.778 44.5809 174.778 34.2549C174.778 31.7118 175.289 29.3053 176.209 27.0865C176.822 25.6016 177.674 24.2532 178.628 22.9902C178.935 22.5806 179.276 22.188 179.616 21.7955C180.655 20.6349 181.797 19.5596 183.092 18.6721C186.073 16.6581 189.651 15.4804 193.501 15.4804C203.808 15.4804 212.224 23.9119 212.224 34.2378M119.545 228.127C59.8153 228.127 11.3804 179.604 11.3804 119.764C11.3804 59.9247 59.8153 11.4012 119.545 11.4012C137.655 11.4012 154.76 15.873 169.786 23.7583C168.355 26.9841 167.537 30.5171 167.537 34.2549C167.537 48.6088 179.207 60.3002 193.535 60.3002C198.544 60.3002 203.178 58.7983 207.147 56.3405C220.027 74.1763 227.71 96.0912 227.71 119.764C227.71 179.604 179.276 228.127 119.545 228.127Z"/></svg>
         <span class="max-sm:sr-only">Dormotech Design</span>
       </h1>
       <nav class="mr-auto ml-2 flex rounded-md bg-forest-100 p-0.5 text-sm font-medium dark:bg-white/10" aria-label="View">
-        <button type="button" data-view="board" class="rounded px-2.5 py-1 text-forest-700 aria-pressed:bg-accent aria-pressed:text-accent-ink aria-pressed:shadow-xs dark:text-forest-300">Board</button>
-        <button type="button" data-view="stats" class="rounded px-2.5 py-1 text-forest-700 aria-pressed:bg-accent aria-pressed:text-accent-ink aria-pressed:shadow-xs dark:text-forest-300">Stats</button>
+        <button type="button" data-view="board" class="rounded px-2.5 py-1 text-forest-700 aria-pressed:bg-accent aria-pressed:text-accent-ink aria-pressed:shadow-xs dark:text-gray-400">Board</button>
+        <button type="button" data-view="stats" class="rounded px-2.5 py-1 text-forest-700 aria-pressed:bg-accent aria-pressed:text-accent-ink aria-pressed:shadow-xs dark:text-gray-400">Stats</button>
       </nav>
       <div id="boardControls" class="flex items-center gap-2 max-sm:order-last max-sm:basis-full sm:flex-wrap">
-      <select id="tabSelect" aria-label="Month" class="h-8 rounded-md max-sm:min-w-0 max-sm:flex-1 border border-forest-950/15 bg-white px-2 text-sm dark:border-white/15 dark:bg-forest-900"></select>
-      <select id="projectFilter" aria-label="Project" class="h-8 max-w-40 rounded-md max-sm:min-w-0 max-sm:flex-1 border border-forest-950/15 bg-white px-2 text-sm dark:border-white/15 dark:bg-forest-900"></select>
-      <button id="orderBtn" type="button" class="flex h-8 shrink-0 items-center gap-1.5 rounded-md border border-forest-950/15 px-2.5 text-sm text-forest-800 hover:bg-forest-50 dark:border-white/15 dark:text-forest-200 dark:hover:bg-white/5"><span id="orderIcon" class="flex"></span><span id="orderLabel" class="max-sm:hidden"></span></button>
-      <span id="total" class="shrink-0 px-1 text-sm tabular-nums text-forest-700 dark:text-forest-300"></span>
+      <select id="tabSelect" aria-label="Month" class="h-8 rounded-md max-sm:min-w-0 max-sm:flex-1 border border-forest-950/15 bg-white px-2 text-sm dark:border-white/15 dark:bg-gray-900"></select>
+      <select id="projectFilter" aria-label="Project" class="h-8 max-w-40 rounded-md max-sm:min-w-0 max-sm:flex-1 border border-forest-950/15 bg-white px-2 text-sm dark:border-white/15 dark:bg-gray-900"></select>
+      <button id="orderBtn" type="button" class="flex h-8 shrink-0 items-center gap-1.5 rounded-md border border-forest-950/15 px-2.5 text-sm text-forest-800 hover:bg-forest-50 dark:border-white/15 dark:text-gray-300 dark:hover:bg-white/5"><span id="orderIcon" class="flex"></span><span id="orderLabel" class="max-sm:hidden"></span></button>
+      <span id="total" class="shrink-0 px-1 text-sm tabular-nums text-forest-700 dark:text-gray-400"></span>
       </div>
       <button id="refreshBtn" type="button" class="h-8 rounded-md border border-forest-950/15 px-3 text-sm font-medium hover:bg-forest-50 disabled:opacity-50 dark:border-white/15 dark:hover:bg-white/5" aria-label="Refresh"><span id="refreshIcon" class="flex sm:hidden"></span><span class="max-sm:hidden">Refresh</span></button>
-      <button id="themeBtn" type="button" aria-label="Toggle light or dark theme" title="Theme" class="flex h-8 items-center rounded-md border border-forest-950/15 px-2 text-forest-800 hover:bg-forest-50 dark:border-white/15 dark:text-forest-200 dark:hover:bg-white/5">
+      <button id="themeBtn" type="button" aria-label="Toggle light or dark theme" title="Theme" class="flex h-8 items-center rounded-md border border-forest-950/15 px-2 text-forest-800 hover:bg-forest-50 dark:border-white/15 dark:text-gray-300 dark:hover:bg-white/5">
         <svg class="size-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/></svg>
         <svg class="hidden size-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>
       </button>
@@ -65,31 +65,31 @@
   <main id="board" class="flex flex-1 flex-col gap-3 p-4 lg:flex-row lg:items-start"></main>
 </div>
 
-<dialog id="editDialog" class="m-auto w-[min(32rem,calc(100%-2rem))] rounded-lg border border-forest-950/10 bg-white p-0 text-forest-950 shadow-xl backdrop:bg-forest-950/40 dark:border-white/10 dark:bg-forest-900 dark:text-white">
+<dialog id="editDialog" class="m-auto w-[min(32rem,calc(100%-2rem))] rounded-lg border border-forest-950/10 bg-white p-0 text-forest-950 shadow-xl backdrop:bg-forest-950/40 dark:border-white/10 dark:bg-gray-900 dark:text-white">
   <form id="editForm" method="dialog" class="space-y-4 p-5">
     <h2 class="text-base font-semibold">Task</h2>
     <label class="block space-y-1.5"><span class="text-sm font-medium">Title</span>
-      <textarea name="title" rows="2" required class="block w-full resize-y rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950"></textarea></label>
+      <textarea name="title" rows="2" required class="block w-full resize-y rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-gray-950"></textarea></label>
     <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
       <label class="block space-y-1.5"><span class="text-sm font-medium">Hours</span>
-        <input name="hours" inputmode="decimal" placeholder="e.g. 4.5" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950"></label>
+        <input name="hours" inputmode="decimal" placeholder="e.g. 4.5" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-gray-950"></label>
       <label class="block space-y-1.5"><span class="text-sm font-medium">Project</span>
-        <input name="project" list="projectList" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950"></label>
+        <input name="project" list="projectList" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-gray-950"></label>
       <label class="col-span-2 block space-y-1.5 sm:col-span-1"><span class="text-sm font-medium">Designer</span>
-        <input name="assignee" list="assigneeList" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950"></label>
+        <input name="assignee" list="assigneeList" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-gray-950"></label>
       <div role="group" aria-labelledby="deadlineLabel" class="col-span-2 space-y-1.5 sm:col-span-3">
         <span id="deadlineLabel" class="block text-sm font-medium">Deadline</span>
         <div class="flex gap-2">
-          <input name="deadline" type="date" aria-label="Deadline date" class="block min-w-0 flex-1 rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950">
-          <input name="deadlineTime" type="time" aria-label="Deadline time" class="block w-32 rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent disabled:opacity-50 dark:border-white/15 dark:bg-forest-950">
+          <input name="deadline" type="date" aria-label="Deadline date" class="block min-w-0 flex-1 rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-gray-950">
+          <input name="deadlineTime" type="time" aria-label="Deadline time" class="block w-32 rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent disabled:opacity-50 dark:border-white/15 dark:bg-gray-950">
         </div>
       </div>
       <label class="col-span-2 block space-y-1.5 sm:col-span-1"><span class="text-sm font-medium">Done date</span>
-        <input name="doneDate" type="date" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950"></label>
+        <input name="doneDate" type="date" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-gray-950"></label>
     </div>
     <label class="block space-y-1.5"><span class="text-sm font-medium">Comment</span>
-      <textarea name="comment" rows="3" class="block w-full resize-y rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-950"></textarea></label>
-    <p id="editError" class="text-sm text-forest-800 empty:hidden dark:text-forest-200"></p>
+      <textarea name="comment" rows="3" class="block w-full resize-y rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-gray-950"></textarea></label>
+    <p id="editError" class="text-sm text-forest-800 empty:hidden dark:text-gray-300"></p>
     <div class="flex justify-end gap-2">
       <button value="cancel" formnovalidate class="rounded-md border border-forest-950/15 px-3 py-2 text-sm font-medium hover:bg-forest-50 dark:border-white/15 dark:hover:bg-white/5">Cancel</button>
       <button value="save" class="rounded-md bg-accent px-3 py-2 text-sm font-medium text-accent-ink hover:bg-accent/90">Save</button>
@@ -99,8 +99,8 @@
 <datalist id="projectList"></datalist>
 <datalist id="assigneeList"></datalist>
 
-<div id="tip" hidden class="pointer-events-none fixed z-30 max-w-64 rounded-md bg-forest-950 px-2.5 py-1.5 text-xs text-white shadow-lg dark:bg-white dark:text-forest-950"></div>
-<div id="toast" role="status" aria-live="polite" class="pointer-events-none fixed inset-x-4 bottom-4 z-20 mx-auto max-w-md rounded-md bg-forest-950 px-4 py-3 text-sm text-white shadow-lg transition-opacity empty:opacity-0 dark:bg-white dark:text-forest-950"></div>
+<div id="tip" hidden class="pointer-events-none fixed z-30 max-w-64 rounded-md bg-forest-950 px-2.5 py-1.5 text-xs text-white shadow-lg dark:bg-white dark:text-gray-950"></div>
+<div id="toast" role="status" aria-live="polite" class="pointer-events-none fixed inset-x-4 bottom-4 z-20 mx-auto max-w-md rounded-md bg-forest-950 px-4 py-3 text-sm text-white shadow-lg transition-opacity empty:opacity-0 dark:bg-white dark:text-gray-950"></div>
 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbxCWXJuV088YScFiY7BAkahVyzJ_ZN0158yZLtuGbqOSmVcqcN7X4GT7m0YNaUVn0xS/exec";
@@ -201,7 +201,7 @@ $('#keyForm').addEventListener('submit', (e) => {
 
 // ---------- завантаження ----------
 function boardMessage(msg) {
-  $('#board').innerHTML = `<p class="w-full py-16 text-center text-sm text-forest-700 dark:text-forest-300">${esc(msg)}</p>`;
+  $('#board').innerHTML = `<p class="w-full py-16 text-center text-sm text-forest-700 dark:text-gray-400">${esc(msg)}</p>`;
 }
 
 // Кеш у браузері: сторінка одразу показує дані з минулого разу, а свіжі підтягує у фоні.
@@ -290,8 +290,8 @@ window.addEventListener('focus', autoRefresh);
 
 // ---------- рендер ----------
 const DOT = {
-  'not started': 'border border-forest-500 dark:border-forest-600',
-  'in progress': 'bg-forest-500 dark:bg-forest-600',
+  'not started': 'border border-forest-500 dark:border-gray-500',
+  'in progress': 'bg-forest-500 dark:bg-gray-500',
   done: 'bg-forest-950 dark:bg-white',
 };
 // Іконки: SF Symbols зі шрифту SF Pro Rounded, якщо він встановлений на пристрої (вбудовувати його ліцензія Apple не дозволяє).
@@ -388,19 +388,19 @@ function dropTarget(list) {
 
 function columnHtml(status, cols, items) {
   const hours = items.reduce((s, i) => s + (i.hours || 0), 0);
-  const dot = DOT[norm(status)] || 'border border-dashed border-forest-500 dark:border-forest-600';
+  const dot = DOT[norm(status)] || 'border border-dashed border-forest-500 dark:border-gray-500';
   return `<section class="flex min-w-0 flex-col rounded-lg bg-forest-50 lg:flex-1 dark:bg-white/5">
     <div class="flex items-center gap-2 px-3 pt-3 pb-2">
       <span class="size-2 shrink-0 rounded-full ${dot}"></span>
       <h2 class="truncate text-sm font-medium">${esc(status || 'No status')}</h2>
-      <span class="text-sm tabular-nums text-forest-700 dark:text-forest-300">${items.length}</span>
-      <span class="ml-auto text-xs tabular-nums text-forest-700 dark:text-forest-300">${fmtHours(hours)} h</span>
+      <span class="text-sm tabular-nums text-forest-700 dark:text-gray-400">${items.length}</span>
+      <span class="ml-auto text-xs tabular-nums text-forest-700 dark:text-gray-400">${fmtHours(hours)} h</span>
     </div>
     <div data-list="${esc(status)}" class="flex min-h-20 flex-col gap-2 rounded-lg px-2 pb-2">
-      ${items.map((i) => cardHtml(i, cols)).join('') || '<p data-temp class="py-6 text-center text-xs text-forest-600 dark:text-forest-600">Empty</p>'}
+      ${items.map((i) => cardHtml(i, cols)).join('') || '<p data-temp class="py-6 text-center text-xs text-forest-600 dark:text-gray-500">Empty</p>'}
     </div>
     <div class="px-2 pb-2">
-      <button type="button" data-add="${esc(status)}" class="w-full rounded-md px-2 py-1.5 text-left text-sm text-forest-700 hover:bg-forest-950/5 hover:text-forest-950 dark:text-forest-300 dark:hover:bg-white/5 dark:hover:text-white">+ Task</button>
+      <button type="button" data-add="${esc(status)}" class="w-full rounded-md px-2 py-1.5 text-left text-sm text-forest-700 hover:bg-forest-950/5 hover:text-forest-950 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white">+ Task</button>
     </div>
   </section>`;
 }
@@ -441,14 +441,14 @@ function designerChipHtml(name) {
   const hue = designerColor(name);
   return hue
     ? `<span title="Designer" data-hue="${hue}" class="rounded-full px-2 py-0.5 font-medium ${HUE_CLASSES[hue].solid}">${esc(name)}</span>`
-    : `<span title="Designer" class="rounded-full bg-forest-200 px-2 py-0.5 font-medium text-forest-900 dark:bg-white/15 dark:text-forest-50">${esc(name)}</span>`;
+    : `<span title="Designer" class="rounded-full bg-forest-200 px-2 py-0.5 font-medium text-forest-900 dark:bg-white/15 dark:text-gray-100">${esc(name)}</span>`;
 }
 
 function chipHtml(name) {
   const hue = projectColor(name);
   return hue
-    ? `<span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-medium text-forest-950 dark:text-forest-50 ${HUE_CLASSES[hue].soft}"><span class="size-1.5 rounded-full ${HUE_CLASSES[hue].dot}"></span>${esc(name)}</span>`
-    : `<span class="rounded bg-forest-100 px-1.5 py-0.5 font-medium text-forest-800 dark:bg-white/10 dark:text-forest-200">${esc(name)}</span>`;
+    ? `<span class="inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-medium text-forest-950 dark:text-gray-100 ${HUE_CLASSES[hue].soft}"><span class="size-1.5 rounded-full ${HUE_CLASSES[hue].dot}"></span>${esc(name)}</span>`
+    : `<span class="rounded bg-forest-100 px-1.5 py-0.5 font-medium text-forest-800 dark:bg-white/10 dark:text-gray-300">${esc(name)}</span>`;
 }
 
 function cardHtml(i, cols) {
@@ -469,7 +469,7 @@ function cardHtml(i, cols) {
   const hue = i.assignee && designerColor(i.assignee);
   const tone = hue
     ? 'border-(--h-300) bg-(--h-100) hover:border-(--h-500) dark:border-(--h-800) dark:bg-(--h-950) dark:hover:border-(--h-600)'
-    : 'border-forest-950/10 bg-white hover:border-forest-950/25 dark:border-white/10 dark:bg-forest-900 dark:hover:border-white/25';
+    : 'border-forest-950/10 bg-white hover:border-forest-950/25 dark:border-white/10 dark:bg-gray-900 dark:hover:border-white/25';
   return `<article data-card ${hue ? `data-hue="${hue}"` : ''} ${i.row ? `data-row="${i.row}" tabindex="0"` : 'data-temp'} class="cursor-pointer rounded-md border p-3 text-(--h-950) shadow-xs outline-none focus-visible:border-(--h-950) dark:text-white dark:focus-visible:border-white ${tone}">
     <p class="text-sm leading-snug font-medium break-words">${esc(i.title)}</p>
     ${meta ? `<div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-(--h-800) dark:text-(--h-300)">${meta}</div>` : ''}
@@ -569,7 +569,7 @@ function openAddForm(btn) {
   const status = btn.dataset.add;
   const form = document.createElement('form');
   form.dataset.addForm = '';
-  form.innerHTML = `<input name="title" required placeholder="Task title" aria-label="New task title" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-forest-900">`;
+  form.innerHTML = `<input name="title" required placeholder="Task title" aria-label="New task title" class="block w-full rounded-md border border-forest-950/15 bg-white px-3 py-2 text-sm outline-none focus:border-accent dark:border-white/15 dark:bg-gray-900">`;
   btn.replaceWith(form);
   const input = form.elements.title;
   input.focus();
@@ -668,7 +668,7 @@ function monthLabel(tab) {
 
 async function loadStats({ fresh = false, background = false } = {}) {
   const box = $('#stats'), btn = $('#refreshBtn');
-  const msg = (text) => { box.innerHTML = `<p class="py-16 text-center text-sm text-forest-700 dark:text-forest-300">${esc(text)}</p>`; };
+  const msg = (text) => { box.innerHTML = `<p class="py-16 text-center text-sm text-forest-700 dark:text-gray-400">${esc(text)}</p>`; };
   if (!state.stats) state.stats = cacheGet('kanbanStats');
   const visible = () => state.view === 'stats';
   if (visible()) { if (state.stats) renderStats(); else msg('Loading all months…'); }
@@ -735,7 +735,7 @@ function renderStats() {
   const s = computeStats(state.stats);
   if (!s.months.length) return void ($('#stats').innerHTML = '<p class="py-16 text-center text-sm text-forest-700">No data.</p>');
   const card = 'rounded-lg border border-forest-950/10 p-4 dark:border-white/10';
-  const muted = 'text-forest-700 dark:text-forest-300';
+  const muted = 'text-forest-700 dark:text-gray-400';
   const section = (title, sub, body) => `<section><h2 class="text-base font-semibold">${title}</h2>${sub ? `<p class="mt-0.5 text-sm ${muted}">${sub}</p>` : ''}<div class="mt-4">${body}</div></section>`;
   const tile = (label, value, note = '') => `<div class="${card}"><p class="text-xs ${muted}">${label}</p><p class="mt-1 text-2xl font-semibold tabular-nums">${value}</p>${note ? `<p class="mt-0.5 text-xs ${muted}">${note}</p>` : ''}</div>`;
   const h = (n) => `${fmtHours(n)} h`;
@@ -743,7 +743,7 @@ function renderStats() {
   // Години по місяцях: стовпчики + лінії середнього і норми
   const max1 = Math.max(NORM, ...s.months.map((m) => m.hours)) * 1.08;
   const y1 = (v) => `${((v / max1) * 100).toFixed(2)}%`;
-  const refLine = (v, label, style) => `<div class="pointer-events-none absolute inset-x-0 border-t ${style}" style="bottom:${y1(v)}"><span class="absolute right-0 -translate-y-full bg-white/80 px-1 text-[11px] ${muted} dark:bg-forest-950/80">${label}</span></div>`;
+  const refLine = (v, label, style) => `<div class="pointer-events-none absolute inset-x-0 border-t ${style}" style="bottom:${y1(v)}"><span class="absolute right-0 -translate-y-full bg-white/80 px-1 text-[11px] ${muted} dark:bg-gray-950/80">${label}</span></div>`;
   const labels = `<div class="flex gap-1.5 pt-1.5">${s.months.map((m) => `<span class="flex-1 text-center text-[11px] ${muted}">${esc(m.label)}</span>`).join('')}</div>`;
   const monthsChart = `<div class="overflow-x-auto"><div class="min-w-[36rem]">
     <div class="relative flex h-56 items-end gap-1.5 border-b border-forest-950/15 dark:border-white/15">

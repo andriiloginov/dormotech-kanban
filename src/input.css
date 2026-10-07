@@ -49,10 +49,11 @@ html.has-sf select { /* SF Symbol chevron.down, коли SF Pro Rounded вста
 [data-card] { --h-50: var(--color-forest-50); --h-100: var(--color-forest-100); --h-200: var(--color-forest-200); --h-300: var(--color-forest-300); --h-400: var(--color-forest-400); --h-500: var(--color-forest-500); --h-600: var(--color-forest-600); --h-700: var(--color-forest-700); --h-800: var(--color-forest-800); --h-900: var(--color-forest-900); --h-950: var(--color-forest-950); }
 [data-card][data-hue="teal"] { --h-50: var(--color-teal-50); --h-100: var(--color-teal-100); --h-200: var(--color-teal-200); --h-300: var(--color-teal-300); --h-400: var(--color-teal-400); --h-500: var(--color-teal-500); --h-600: var(--color-teal-600); --h-700: var(--color-teal-700); --h-800: var(--color-teal-800); --h-900: var(--color-teal-900); --h-950: var(--color-teal-950); }
 [data-card][data-hue="sand"] { --h-50: var(--color-sand-50); --h-100: var(--color-sand-100); --h-200: var(--color-sand-200); --h-300: var(--color-sand-300); --h-400: var(--color-sand-400); --h-500: var(--color-sand-500); --h-600: var(--color-sand-600); --h-700: var(--color-sand-700); --h-800: var(--color-sand-800); --h-900: var(--color-sand-900); --h-950: var(--color-sand-950); }
+.dark [data-card]:not([data-hue]) { --h-50: var(--color-gray-50); --h-100: var(--color-gray-100); --h-200: var(--color-gray-200); --h-300: var(--color-gray-300); --h-400: var(--color-gray-400); --h-500: var(--color-gray-500); --h-600: var(--color-gray-600); --h-700: var(--color-gray-700); --h-800: var(--color-gray-800); --h-900: var(--color-gray-900); --h-950: var(--color-gray-950); } /* темна тема — сіра шкала */
 
 /* Перетягування карток (SortableJS). Без @layer, щоб перекрити утиліти картки. */
 .drag-ghost { /* місце, куди впаде картка */
-  @apply border-2 border-dashed border-forest-300 bg-transparent shadow-none dark:border-forest-700;
+  @apply border-2 border-dashed border-forest-300 bg-transparent shadow-none dark:border-gray-600;
 }
 .drag-ghost > * { visibility: hidden; }
 .drag-clone { /* картка під курсором */
@@ -63,7 +64,7 @@ html.has-sf select { /* SF Symbol chevron.down, коли SF Pro Rounded вста
   @apply bg-forest-950/[0.04] ring-2 ring-forest-950/10 ring-inset dark:bg-white/[0.06] dark:ring-white/15;
 }
 
-/* Шкали бренду Dormotech (гайд «Tints»). Тема інтерфейсу — лише forest; teal / sand — акценти чіпів і графіків;
+/* Шкали бренду Dormotech (гайд «Tints»). Тема інтерфейсу: світла — forest, темна — gray; teal / sand — акценти чіпів і графіків;
    lime — лише кнопки й перемикач; gray — «Other». Імена перекривають стандартні палітри Tailwind. */
 @theme {
   --color-teal-50: #e5fff9; --color-teal-100: #ccfff3; --color-teal-200: #99ffe7; --color-teal-300: #66ffdb; --color-teal-400: #33ffcf; --color-teal-500: #00ffc4;
