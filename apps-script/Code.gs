@@ -6,20 +6,20 @@
 
 const HIDDEN_TABS = []; // назви вкладок (малими літерами), які API ніколи не читає; у таблиці Dormotech таких немає
 const FIELDS = {
-  title: ['задача'],
-  hours: ['годин', 'години'],
-  project: ['проєкт'],
-  status: ['статус'],
-  assignee: ['відповідальний'],
-  doneDate: ['дата', 'дата виконання'],
-  deadline: ['дедлайн'],
-  comment: ['коментар'],
-  briefLink: ['посилання тз'],
-  fileLink: ['посилання файл'],
+  title: ['задача', 'task', 'name'],
+  hours: ['годин', 'години', 'hours'],
+  project: ['проєкт', 'project'],
+  status: ['статус', 'status'],
+  assignee: ['відповідальний', 'designer', 'assignee', 'owner', 'responsible'],
+  doneDate: ['дата', 'дата виконання', 'date', 'done date', 'completed'],
+  deadline: ['дедлайн', 'deadline', 'due', 'due date'],
+  comment: ['коментар', 'comment', 'comments', 'notes'],
+  briefLink: ['посилання тз', 'brief link', 'brief'],
+  fileLink: ['посилання файл', 'file link', 'file'],
 };
 const EDITABLE = ['title', 'hours', 'project', 'status', 'assignee', 'comment', 'deadline', 'doneDate'];
 const DEFAULT_STATUSES = ['Not started', 'In progress', 'Done'];
-const VERSION = '2026-10-07'; // видно за адресою …/exec?action=ping — так легко перевірити, що розгорнута свіжа версія
+const VERSION = '2026-10-07b'; // видно за адресою …/exec?action=ping — так легко перевірити, що розгорнута свіжа версія
 const CACHE_TTL = 300; // с. Кеш скидається одразу при записі через API і при ручній правці таблиці (onEdit).
 
 /** Запустіть один раз вручну: згенерує ключ доступу і виведе його в журнал. */
@@ -241,17 +241,17 @@ function getBoard(tab) {
   return header ? { sheet, header } : null;
 }
 
-/** Рядок заголовків — перший із рядків 1..5, де є клітинка «Задача». */
+/** Рядок заголовків — перший із рядків 1..5, де є клітинка «Задача» / «Task». */
 function readHeader(sheet) {
   const width = sheet.getLastColumn(), n = Math.min(5, sheet.getLastRow());
   if (!width || !n) return null;
   const rows = sheet.getRange(1, 1, n, width).getDisplayValues();
   for (let r = 0; r < n; r++) {
     const cells = rows[r].map(norm);
-    if (cells.indexOf('задача') < 0) continue;
+    if (!cells.some((c) => FIELDS.title.indexOf(c) >= 0)) continue;
     const cols = {};
     cells.forEach((c, i) => {
-      if (c === '№') cols.num = i;
+      if (c === '№' || c === '#') cols.num = i;
       Object.keys(FIELDS).forEach((f) => {
         if (cols[f] == null && FIELDS[f].indexOf(c) >= 0) cols[f] = i;
       });

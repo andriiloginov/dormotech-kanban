@@ -82,13 +82,13 @@ await test('завантаження дошки з #key, ключ прибран
   assert.equal(await column('Hold').count(), 0, 'порожній додатковий статус прихований');
   assert.deepEqual(await card('Логотип').locator('select option').allTextContents(), ['Not started', 'In progress', 'Done']);
   assert.equal(await column('Not started').locator('article').count(), 3);
-  assert.match(await page.textContent('#total'), /21 год/);
+  assert.match(await page.textContent('#total'), /21 h/);
 });
 
 await test('фільтр за проєктом', async () => {
   await page.selectOption('#projectFilter', 'ATE');
   assert.equal(await page.locator('article').count(), 2);
-  assert.match(await page.textContent('#total'), /11 год/);
+  assert.match(await page.textContent('#total'), /11 h/);
   await page.selectOption('#projectFilter', '');
 });
 
@@ -150,7 +150,7 @@ await test('редагування годин "4,5" → число 4.5', async (
   const row = rowOf('Sep 26', 'Банер для сайту');
   await until(() => row[2] === 4.5);
   assert.equal(typeof row[2], 'number');
-  await card('Банер для сайту').getByText('4,5 год').waitFor();
+  await card('Банер для сайту').getByText('4.5 h').waitFor();
 });
 
 await test('дедлайн з часом → Date з годинами, час видно в картці', async () => {
@@ -161,7 +161,7 @@ await test('дедлайн з часом → Date з годинами, час в
   const row = rowOf('Sep 26', 'Пости для соцмереж');
   await until(() => isDate(row[5]) && row[5].getHours() === 14);
   assert.equal(row[5].getMinutes(), 30);
-  await card('Пости для соцмереж').getByText('до 01.10.2026 14:30').waitFor();
+  await card('Пости для соцмереж').getByText('due 01.10.2026 14:30').waitFor();
   await card('Пости для соцмереж').locator('p').click();
   assert.equal(await page.inputValue('#editForm [name=deadlineTime]'), '14:30');
   await page.click('#editForm button[value=cancel]');
@@ -202,7 +202,7 @@ await test('conflict у UI: дошка перезавантажується', as
   rowOf('Sep 26', 'Логотип')[0] = 'Логотип v2';
   onEdit();
   await card('Логотип').locator('select').selectOption('In progress');
-  await page.locator('#toast', { hasText: 'змінився' }).waitFor();
+  await page.locator('#toast', { hasText: 'row changed' }).waitFor();
   await column('Not started').locator('article', { hasText: 'Логотип v2' }).waitFor();
   assert.equal(rowOf('Sep 26', 'Логотип v2')[3], 'Not started');
 });
@@ -212,16 +212,16 @@ await test('статистика: усі місяці одним запитом,
   assert.deepEqual(tabs.map((t) => t.tab), ['Sep 26', 'Aug 26', 'September 25']);
   const expected = tabs.flatMap((t) => t.items).filter((i) => !/^overtime/i.test(i.title)).reduce((s, i) => s + (i.hours || 0), 0);
   await page.click('[data-view=stats]');
-  await page.getByText('Найбільші задачі').waitFor();
+  await page.getByText('Largest tasks').waitFor();
   assert.equal(await page.locator('#board').isHidden(), true);
-  const totalEl = page.locator('#stats p', { hasText: 'Всього годин' }).locator('xpath=following-sibling::p[1]');
+  const totalEl = page.locator('#stats p', { hasText: 'Total hours' }).locator('xpath=following-sibling::p[1]');
   const shown = async () => Number((await totalEl.textContent()).replace(/\s/g, '').replace(',', '.'));
   for (let i = 0; i < 50 && (await shown()) !== expected; i++) await page.waitForTimeout(100); // спершу — з кешу, потім свіже
   assert.equal(await shown(), expected);
   assert.equal(await page.getByText('Overtime extimate').count(), 0);
-  await page.getByText('Вер 25 — Вер 26').waitFor();
+  await page.getByText('Sep 25 — Sep 26').waitFor();
   await page.reload();
-  await page.getByText('Найбільші задачі').waitFor(); // вид запам'ятовується
+  await page.getByText('Largest tasks').waitFor(); // вид запам'ятовується
   await page.click('[data-view=board]');
   await page.locator('article').first().waitFor();
 });
@@ -229,10 +229,10 @@ await test('статистика: усі місяці одним запитом,
 await test('записи під LockService', () => assert.ok(fixture.locks >= 4));
 
 await test('нова вкладка-місяць зліва відкривається сама', async () => {
-  fixture.tabs.unshift({ name: 'Oct 26', rows: [['OVERALL DESIGN SUPPORT'], ['Задача', 'Годин', 'Проєкт', 'Статус'], ['Жовтнева задача', 1, 'ATE', 'Not started']] });
+  fixture.tabs.unshift({ name: 'Oct 26', rows: [[''], ['Name', 'Hours', 'Project', 'Status', 'Designer', 'Date', 'Comment'], ['Жовтнева задача', 1, 'ATE', 'Not started', 'Олена']] });
   onEdit(); // ручна правка в таблиці скидає кеш скрипта
   await page.reload();
-  await card('Жовтнева задача').waitFor();
+  await card('Жовтнева задача').getByText('Олена').waitFor(); // заголовки Dormotech: Name, Designer…
   assert.equal(await page.inputValue('#tabSelect'), 'Oct 26');
   fixture.tabs.shift();
   onEdit();
@@ -240,17 +240,17 @@ await test('нова вкладка-місяць зліва відкриваєт
 
 await test('вихід: ключ і кеш стерто, екран входу', async () => {
   await page.click('#logoutBtn');
-  await page.getByText('Введіть ключ доступу').waitFor();
+  await page.getByText('Enter access key').waitFor();
   assert.deepEqual(await page.evaluate(() => [localStorage.getItem('dormotech:kanbanKey'), localStorage.getItem('dormotech:kanbanBoot')]), [null, null]);
 });
 
 await test('екран ключа і невірний ключ', async () => {
   const p = await browser.newPage();
   await p.goto(PAGE);
-  await p.getByText('Введіть ключ доступу').waitFor();
+  await p.getByText('Enter access key').waitFor();
   await p.fill('#keyInput', 'wrong');
   await p.click('#keyForm button');
-  await p.locator('#keyError', { hasText: 'Невірний ключ' }).waitFor();
+  await p.locator('#keyError', { hasText: 'Invalid access key' }).waitFor();
   await p.close();
 });
 
