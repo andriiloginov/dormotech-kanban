@@ -419,9 +419,9 @@ function projectColor(name) {
 }
 
 // Колір дизайнера — за першою появою в таблиці (від найстарішої вкладки), тож у кожного він сталий.
-// Відтінки в зворотному порядку, щоб перший дизайнер не збігався з найбільшим проєктом.
+// Порядок відтінків за першою появою дизайнера (Andrii — teal, Magda — sand, третій — forest).
 // ponytail: бренд дає 3 розрізнені відтінки, тож з 4-го дизайнера кольори повторюються по колу.
-const DESIGNER_HUES = ['forest', 'sand', 'teal'];
+const DESIGNER_HUES = ['teal', 'sand', 'forest'];
 // Повні рядки класів (Tailwind бачить лише їх). Проєкт — світла заливка + крапка; дизайнер — суцільна. Контраст тексту ≥ 4.5:1.
 const HUE_CLASSES = {
   teal: { dot: 'bg-teal-700 dark:bg-teal-500', soft: 'bg-teal-100 dark:bg-teal-500/15', solid: 'bg-teal-700 text-teal-950 dark:bg-teal-500' },
